@@ -22,9 +22,10 @@ BaseOAuthClient = NamedTuple(
 class PW2OAuthClient(BaseOAuthClient):
 
     def __new__(cls, client_id: str, secret: str, *,
-                scope: str = 'profile', redirect_uri: str,
+                scope: str = None, redirect_uri: str,
                 server: str = None) -> BaseOAuthClient:
         server = server or 'http://localhost:3000/'
+        scope = scope or 'profile'
         if not re.match(r'^[a-z]+://', server):
             server = 'https://' + server
 

@@ -18,10 +18,11 @@ setup(
     install_requires = [
         'requests>=2.19.0',
     ],
-    tests_require = [
-        'pycodestyle>=2.3.1',
-        'pylint>=1.8.2',
-        'vcrpy>=1.13.0',
+    tests_require=[
+        'Flask==1.0.2',
+        'pycodestyle==2.4.0',
+        'pylint==2.0.1',
+        'vcrpy==1.13.0',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',

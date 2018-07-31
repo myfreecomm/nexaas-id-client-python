@@ -1,0 +1,208 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.19.1]
+    method: GET
+    uri: http://localhost:3000/oauth/authorize?response_type=code&client_id=QJDSMPTJWNFPZJ6WINEKJ2CZ5A&redirect_uri=http%3A%2F%2Flocalhost%3A3030%2Foauth%2Fcallback&scope=profile
+  response:
+    body: {string: '<html><body>You are being <a href="http://localhost:3000/sign_in">redirected</a>.</body></html>'}
+    headers:
+      Cache-Control: [no-cache]
+      Content-Type: [text/html; charset=utf-8]
+      Location: ['http://localhost:3000/sign_in']
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Set-Cookie: [_pw2_return_to=%5B%22%2Foauth%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3DQJDSMPTJWNFPZJ6WINEKJ2CZ5A%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%253A3030%252Foauth%252Fcallback%26scope%3Dprofile%22%5D;
+          path=/]
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [68f65988-264d-4f29-a4f5-513a4cf4b9eb]
+      X-Runtime: ['0.037527']
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 302, message: Found}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [_pw2_return_to=%5B%22%2Foauth%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3DQJDSMPTJWNFPZJ6WINEKJ2CZ5A%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%253A3030%252Foauth%252Fcallback%26scope%3Dprofile%22%5D]
+      User-Agent: [python-requests/2.19.1]
+    method: GET
+    uri: http://localhost:3000/sign_in
+  response:
+    body: {string: "<!DOCTYPE html>\n<html>\n  <head>\n    <title>PassaporteWeb</title>\n\
+        \    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"\
+        >\n    <meta name=\"csrf-param\" content=\"authenticity_token\" />\n<meta\
+        \ name=\"csrf-token\" content=\"CB2v77ltMDehkX9BY9MsR6E8YUoiC7m4pFzNQhO+8OSX4xHtf4qBPlJDP0AJQPxf57+wJI+zgUL6XIFGmSDdrw==\"\
+        \ />\n\n    <link rel=\"stylesheet\" media=\"all\" href=\"/assets/semantic-ui.self-13f3076cbbe2d398ebd1e783c17cfffda33f89d3187ff9ec54bce15061acd9b9.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/chameleon.min.self-a6ee14369bc2cfb0254ade113d960438e96a11cd2fbf0b290c0864eea0726840.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/base.self-22c00183561b6b07d2e5eaed457f63126270e8756c55578a9d68e1059ebd0442.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/components/_buttons.self-5d820c2bd7933928f35e40ca40cb86dd1f8075b375236c2f989d2e319c8a68dd.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/components/_card.self-b29ae749a2e94c458ffe5047b1ce0804bf49740be43269fd042c470947636292.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/components/_checkbox.self-0d4b8f2b92f8de0bc7406d6cfdc1ac94d34fe7525bb775a502aafcc4ebfe284b.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/components/_direct_upload.self-cc1fc70d801820d5b87087e9ede6284d858476dbf1c94b46c7b1db095092a3ff.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/components/_form.self-933624258357b3a2397b63302159f3c7398532f6f07b1f7ce80cb2036111f612.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/components/_item.self-c4c0d68a5417a20d42dac2f220c94cd598ca69706ee4879b33b5584bc4e5a19e.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/components/_list.self-132a5f2ff413a7f1e15dbd70f8bf75da6ba8306215e60a698de524877d464127.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/components/_menu.self-2769bef7219190063678505dc53f0bf68945e2a3df604e60c26e6f9c714f37dc.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/components/_modal.self-5f9b42b1628cf3e482c1733945cd9fac4b12d304646d69b33d2b636ab6b0209f.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/components/_popup.self-d28d02e9b806bb2ed079b4d2d15f6b2d3c45e5bf9bdbc7a6f7d641ff9b1624c6.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/components/_segments.self-c2a1fea0d4eab85f443a72c79afb1be3a1262b9b34cf046baeee6e1a8e589d4c.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/components/_tabs.self-9535df43434ca9e16786b0b3294e5061bdbdaaab47a44c8b2417a0505e322cc8.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/helpers/_mixins.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/helpers/_utils.self-e18180e4f5ce9d2c8d26dd73036be9df8c7d66b2eb1d0abe3b30e2cc2ac47e48.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/layouts/blankslate.self-90dff3efd8c9406ff5aded4442650470c1cd508322bc60e5d3e3378be2017932.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/layouts/errors.self-a6d1cdda98d52116f9c795e19487a88a92c2da7c91dfd0c89f66f1c7b6d0e916.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/layouts/flash_message.self-c652f31e54f6c5270b681951e1f202ae6d1702635ac96017594bf89770305b6c.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/layouts/print.self-d86bf2baa269dbc8f6d9183df27dc97d37c0bf17369cc1fb4939539f28539f8e.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/layouts/profile.self-ffec0c4334b6e61e5cae332bfaadf134ca1833e747b4c710b25387ec874b7073.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/layouts/signup.self-3df6d5aae66fca625a3b38ac0302c27cccf203448c8001d2075d66407e79793f.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/layouts/two-way-factor.self-025c699ffa770f20c78d9c3e83d6e66d2dfdaad8488f5aa8f2e88896acc6ccdf.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/web/sign_up.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n<link rel=\"stylesheet\" media=\"all\"\
+        \ href=\"/assets/application.self-d2524d97bf4870944294b74c7946b5c906e242a64430eba3b848a35f540a6bc4.css?body=1\"\
+        \ data-turbolinks-track=\"reload\" />\n    <script src=\"/assets/rails-ujs.self-551fbd47b981dacbb84a270f9123074caf39eb72aaf6f478ab597c6f81435e4b.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/xray.self-130d130a29b059ab5e1f6b7ea349011b67ee8593ecb3e9222db86c7a5d55ed3a.js?body=1\"\
+        ></script>\n<script src=\"/assets/semantic-ui/api.self-5a9f7435c9a2447792f484e0a597e49685cbb8d9c1d52f62dc679b95e3a7eb8b.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/colorize.self-37d09baeb7c88ab3397e4a4ea3e42a018a3bd4d61af35a80f0c6ee8478e7cbc8.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/form.self-3c8ce221d7fb9d534720f70b36a8c52c570ea92e2897b3e365af853054987457.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/state.self-9a73278521b00e9d06e6f340715dbd0a37d19d87af1cb8614b2a4982abcdd91c.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/visibility.self-cfa34c4b8638a0c3ec019f21e90b14a44b384f1c9bf7862f134e7da83647c45d.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/visit.self-7caaf55fd801b602db0dcc84d4034e65e8eee6978aa05d87018c30a82a16e4ef.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/site.self-eed13aba11268689157ab770e530bab912fcbb2716f926e3bcea59e0f91bd8af.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/accordion.self-fe7ae88559b86879caa71a280da75212e314fa299dc905621ed061736accdff7.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/checkbox.self-1cad1a0547b2fc5f01fdbbbdf2d3f0726060e4c8cf539914b93a808803d6bf4c.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/dimmer.self-a9c755a27fe57fb0de90486939352d7ad9f4548d29c587997e32a865f4241116.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/dropdown.self-fe3d491f051970211e0fb3771a30730330d840248e76425fdf2d90e366f3d5fd.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/embed.self-d112ba91cbfc5bd585e5c3374736ac824d3351d6715175ec80b3def51cf382e8.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/modal.self-398d8232d61f76c9bfb72b3f5b03ec69989ec6d78b9b3a58ebe0cdae9ad3b5e7.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/nag.self-380dbc2d4a4febe89fe5996cba9f1c278bd70f1f39bfb389ee53a660acb9aa63.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/popup.self-330e925dd79b876ab48fea8ad33b7390e954d960c86b4e5c9ccf3e921f4dcce1.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/progress.self-ffa9b922ed6b5a7952fb3aa34a709430174c7d9423cf3ba719a914ebc4553383.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/rating.self-913e09622a411a5cf6e8a60dcad586c98b079f658d17b14635681ee766cca73b.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/search.self-3f858546040e0c2bbd95977ae0756437a4272c138421e7382c35c8d76109cd3a.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/shape.self-49279360cac85ee97cb50569037fc4e394257e391b19e23ae6143cb79ca98b9f.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/sidebar.self-3cfb04b712d8e4534068dfb79211211891644ed3ba7199bc4741b21b601d8d6d.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/sticky.self-98b613150bc19857a642599119d78fa55f299f86a543569b7457aced5053be3e.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/tab.self-3b3ea7e792506b46b49ca1b93db5b02a8e8f37750bc36c99094449d0cebc2e70.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui/transition.self-bab4c5ca050c72b8a296d1b892de0249a294d699522326638f2c33d31b23f770.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/semantic-ui.self-6e0ce65031e802f83e9c1e92b66a459ada9f1f5f6522ba6c8d8198228fd219c3.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/activestorage.self-6e8d967adecc8b2a7259df0f51ef5b6f171c33267c7d149a474beccd90c68697.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/turbolinks.self-2db6ec539b9190f75e1d477b305df53d12904d5cafdd47c7ffd91ba25cbec128.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/clipboard.min.self-47ba9baa3680762bfc472c779c954900376a542e2a4b12791b15169fe7541040.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/action_cable.self-69fddfcddf4fdef9828648f9330d6ce108b93b82b0b8d3affffc59a114853451.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/cable.self-8484513823f404ed0c0f039f75243bfdede7af7919dda65f2e66391252443ce9.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/i18n/en.self-d1f842f1f534cbd60fcc0dcaf71c4d5df25d0edd7ba1abd4617052043d5a5cbb.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/i18n/pt.self-b8772202f882d4d17dde452a6f4a796f7699ab457d4027b9c8e1261cc7c5f801.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n<script src=\"/assets/application.self-d9c1df0d36a69bf8167ebb20070284ed3c5f931e7f6efe185b0936aad00629a6.js?body=1\"\
+        \ data-turbolinks-track=\"reload\"></script>\n    <script src=\"/packs/application-5be13e4688c7c60d23c7.js\"\
+        \ data-turbolinks-track=\"reload\"></script>\n    <script src=\"/assets/i18n.self-6fdd343c793c24b71edfd39b10f8401007139dc183b5a346a4c9a489fee6dcc5.js?body=1\"\
+        ></script>\n\n    <script>\n      window.locale = \"pt\"\n      window.default_locale\
+        \ = \"pt\"\n    </script>\n  </head>\n\n  <body data-theme=\"passaporteWeb\"\
+        >\n<div id=\"xray-bar\" style=\"display:none\">\n    <div id=\"xray-bar-controller-path\"\
+        >\n        <span class=\"xray-bar-btn xray-bar-controller xray-icon-flash\"\
+        \ data-path=\"/Users/cacilhas/Workspace/NexaaS/passaporte-web-2/app/controllers/web/sessions_controller.rb\"\
+        >\n          <b></b>\n          Web::SessionsController<span class=\"xray-bar-controller-action\"\
+        >#new</span>\n        </span>\n        <span class=\"xray-bar-btn xray-bar-layout\
+        \ xray-icon-columns\" data-path=\"/Users/cacilhas/Workspace/NexaaS/passaporte-web-2/app/views/layouts/default.html.erb\"\
+        >\n          <b></b>\n          default.html.erb\n        </span>\n      \
+        \  <span class=\"xray-bar-btn xray-bar-view xray-icon-doc\" data-path=\"/Users/cacilhas/Workspace/NexaaS/passaporte-web-2/app/views/web/sessions/new.html.erb\"\
+        >\n          new.html.erb\n        </span>\n    </div>\n  <div id=\"xray-bar-togglers\"\
+        >\n    <span class=\"xray-bar-btn xray-bar-all-toggler xray-icon-search\"\
+        ></span>\n    <span class=\"xray-bar-btn xray-bar-templates-toggler\">\n \
+        \     templates\n    </span>\n    <span class=\"xray-bar-btn xray-bar-views-toggler\"\
+        >\n      views\n    </span>\n  </div>\n  <span class=\"xray-bar-settings-btn\
+        \ xray-icon-cog\"></span>\n  <div id=\"xray-settings\" style=\"display:none\"\
+        >\n    <form>\n      <label for=\"xray-editor-input\">Editor</label>\n   \
+        \   <input id=\"xray-editor-input\" type=\"text\" value=\"/Applications/MacVim.app/Contents/MacOS/Vim\x1E\
+        -f\">\n      <button type=\"submit\">Save</button>\n      <p>Settings are\
+        \ saved to /Users/cacilhas/.xrayconfig</p>\n  </form>\n  </div>\n  <link rel=\"\
+        stylesheet\" media=\"screen\" href=\"/assets/xray.self-ceb30b3d566a79424d2bd9fee6c8217308c75134dd3b567ec1ab34d5261cbabc.css?body=1\"\
+        \ />\n</div>\n\n    <!--XRAY START 58 /Users/cacilhas/Workspace/NexaaS/passaporte-web-2/app/views/layouts/_flash.html.erb-->\n\
+        \n<!--XRAY END 58-->\n    <div class=\"ch-login\">\n      <div class=\"ch-login-container\
+        \ \">\n        <div class=\"ch-login-header\">\n          <img alt=\"PassaporteWeb\"\
+        \ title=\"PassaporteWeb\" class=\"logo\" src=\"/assets/logo-pw-77cd7a06b50d5c0251d20caee9733edb32ed0efce44281038fc2c2dd33812b52.svg\"\
+        \ />\n          <h1 class=\"ui header\"><span>Fazer login</span><span class=\"\
+        ui sub header\">e prosseguir para Minha Conta</span></h1>\n          \n  \
+        \      </div>\n\n        <div class=\"ch-login-content\">\n          <!--XRAY\
+        \ START 57 /Users/cacilhas/Workspace/NexaaS/passaporte-web-2/app/views/web/sessions/new.html.erb-->\n\
+        \n<div class=\"ch-login-form\">\n  <form class=\"simple_form ui form\" id=\"\
+        new_session\" action=\"/sign_in\" accept-charset=\"UTF-8\" method=\"post\"\
+        ><input name=\"utf8\" type=\"hidden\" value=\"&#x2713;\" /><input type=\"\
+        hidden\" name=\"authenticity_token\" value=\"31MumTrMv6DuT9Klv98wdNuSNablcw2dqI3k+oGNIq4+wssEzWxq1TsG0Ck+qFpvjeqIjp+TprxKkY9yDCIehA==\"\
+        \ />\n    <div class=\"field\">\n      <div class=\"field email required session_email\"\
+        ><input class=\"string email required\" autofocus=\"autofocus\" required=\"\
+        required\" aria-required=\"true\" placeholder=\"E-mail\" type=\"email\" name=\"\
+        session[email]\" id=\"session_email\" /></div>\n    </div>\n    <div class=\"\
+        field\">\n      <div class=\"field password required session_password\"><input\
+        \ class=\"password required\" required=\"required\" aria-required=\"true\"\
+        \ placeholder=\"Senha\" type=\"password\" name=\"session[password]\" id=\"\
+        session_password\" /></div>\n    </div>\n    <div class=\"field\">\n     \
+        \ <div class=\"ui checkbox\">\n        <div class=\"field boolean optional\
+        \ session_remember_me\"><input name=\"session[remember_me]\" type=\"hidden\"\
+        \ value=\"0\" /><input class=\"boolean optional\" type=\"checkbox\" value=\"\
+        1\" checked=\"checked\" name=\"session[remember_me]\" id=\"session_remember_me\"\
+        \ /><label class=\"boolean optional\" for=\"session_remember_me\">Confiar\
+        \ neste navegador\n            <span data-tooltip=\"Ao desmarcar esta op\xE7\
+        \xE3o, sua sess\xE3o no PassaporteWeb ir\xE1 expirar assim que voc\xEA fechar\
+        \ a janela do seu navegador, para sua seguran\xE7a.\n\" data-inverted=\"\"\
+        >\n              <i class=\"icon question circle small grey\"></i>\n     \
+        \       </span></label></div>\n      </div>\n    </div>\n    <div class=\"\
+        ui divider hidden\"></div>\n    <input type=\"submit\" name=\"commit\" value=\"\
+        Entrar\" class=\"ui primary submit button ui fluid button\" data-disable-with=\"\
+        Entrar\" />\n</form>  <div class=\"ch-login-helpers\">\n    <span><a href=\"\
+        /recover_password\">Esqueceu sua senha?</a></span>\n    <span>Ainda n\xE3\
+        o possui conta? <a href=\"/start_sign_up\">Crie agora</a></span>\n  </div>\n\
+        </div>\n\n<!--XRAY END 57-->\n        </div>\n\n        <div class=\"ch-login-footer\"\
+        >\n          <ul>\n            <li><a href=\"https://www.passaporteweb.com.br/termos_de_servico\"\
+        >Termos de servi\xE7o</a></li>\n            <li><a href=\"https://myfreecomm.github.io/passaporte-web\"\
+        >Documenta\xE7\xE3o da API</a></li>\n          </ul>\n        </div>\n   \
+        \   </div>\n    </div>\n  </body>\n</html>\n"}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Language: [pt]
+      Content-Type: [text/html; charset=utf-8]
+      ETag: [W/"12e58333435e065bcdd81480e9f85ebe"]
+      Referrer-Policy: [strict-origin-when-cross-origin]
+      Set-Cookie: [_pw2_session=7ae3b152971c48bb60f8438a5473cd4d; path=/; HttpOnly;
+          SameSite=Strict]
+      X-Content-Type-Options: [nosniff]
+      X-Download-Options: [noopen]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Permitted-Cross-Domain-Policies: [none]
+      X-Request-Id: [0fe5b5e9-6171-479f-a282-54fe0440f70e]
+      X-Runtime: ['0.466935']
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1
