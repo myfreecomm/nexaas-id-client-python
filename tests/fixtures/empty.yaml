@@ -1,0 +1,20 @@
+interactions:
+- request:
+    body: client_id=client&client_secret=secret&redirect_uri=http%3A%2F%2Flocalhost%2Fcallback&grant_type=authorization_code&code=the-access-grant-code
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['141']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.19.1]
+    method: POST
+    uri: http://localhost:3000/oauth/token
+  response:
+    body: {string: ''}
+    headers:
+      Content-length: ['0']
+      Date: ['Tue, 31 Jul 2018 21:33:45 GMT']
+      Server: [WSGIServer/0.2 CPython/3.6.5]
+    status: {code: 204, message: NO CONTENT}
+version: 1
