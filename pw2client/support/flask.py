@@ -29,6 +29,17 @@ def signin():
     return redirect(get_client().authorize_url)
 
 
+@oauth.route('/signout')
+def signout():
+    if 'oauth_access_token' in session:
+        del session['oauth_access_token']
+    next_url = request.args.get('next_url') or \
+               session.get('oauth_next_url') or \
+               request.headers.get('Referer') or \
+               '/'
+    return redirect(next_url)
+
+
 @oauth.route('/callback')
 def callback():
     client = get_client()

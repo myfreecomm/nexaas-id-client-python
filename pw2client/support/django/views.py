@@ -15,6 +15,17 @@ def signin(request):
     return redirect(get_client(request).authorize_url)
 
 
+def signout(request):
+    session = request.session
+    if 'oauth_access_token' in session:
+        del session['oauth_access_token']
+    next_url = request.GET.get('next_url') or \
+               session.get('oauth_next_url') or \
+               request.META.get('HTTP_REFERER') or \
+               '/'
+    return redirect(next_url)
+
+
 def callback(request):
     client = get_client(request)
     code = request.GET.get('code')

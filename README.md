@@ -51,17 +51,8 @@ If The view signature presents the `access_token` argument, the access token
 will be supplied. Anyway you can retrieve de access token from the session,
 under the key `oauth_access_token`.
 
-It’s recommended offer a sign out view:
-
-```python
-from django.shortcuts import redirect
-
-def signout(request):
-    session = request.session
-    if 'oauth_access_token' in session:
-        del session['oauth_access_token']
-    return redirect('index')
-```
+In order to logout, use the app route `signout`. The query string key
+`next_url` inform where to redirect after sign out.
 
 ### Flask
 
@@ -94,17 +85,8 @@ If The view signature presents the `access_token` argument, the access token
 will be supplied. Anyway you can retrieve de access token from the session,
 under the key `oauth_access_token`.
 
-It’s recommended offer a sign out view:
-
-```python
-from flask import redirect, session, url_for
-
-@app.route('/signout')
-def signout():
-    if 'oauth_access_token' in session:
-        del session['oauth_access_token']
-    return redirect(url_for('index')
-```
+In order to logout, use the blueprint route `signout`. The query string key
+`next_url` inform where to redirect after sign out.
 
 ## TODO
 
