@@ -1,5 +1,5 @@
 from unittest import TestCase, skip
-from pw2client.support.django import pw2oauth
+from pw2client.support import django
 
 
 class DjangoSupportTest(TestCase):

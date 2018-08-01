@@ -1,20 +1,14 @@
 import re
 import requests
-from typing import NamedTuple
+from collections import namedtuple
 from urllib.parse import ParseResult, urlencode, urlparse
 
 __all__ = ['PW2OAuthClient']
 
 
-BaseOAuthClient = NamedTuple(
+BaseOAuthClient = namedtuple(
     'PW2OAuthClient',
-    [
-        ('id', str),
-        ('secret', str),
-        ('scope', str),
-        ('redirect_uri', str),
-        ('server', ParseResult),
-    ],
+    'id secret scope redirect_uri server',
 )
 
 
