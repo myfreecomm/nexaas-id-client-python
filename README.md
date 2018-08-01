@@ -3,7 +3,7 @@
 This is a client for PassaporteWeb v.2. It brings support for generic OAuth
 authentication and for Django and Flask frameworks.
 
-## OAuth
+## OAuth client
 
 The general use is:
 
@@ -27,7 +27,7 @@ where `code` is the access grant code.
 - `PW2_CLIENT_ID`: the application token
 - `PW2_CLIENT_SECRET`: the application secret
 - `PW2_HOST`: the PassaporteWeb host
-- `PW2_CLIENT_SCOPE`: the scope (can be None)
+- `PW2_CLIENT_SCOPE`: the scope (can be `None`)
 
 ### Django
 
@@ -40,16 +40,16 @@ In Django you must include the following path to the main `urlpatterns`:
 The views that requires authorized access must be decorated:
 
 ```python
+from pw2client import PW2Client
 from pw2client.support.django.decorators import authorization_required
 
 @authorization_required
-def index(request, access_token):
+def index(request, api_client: PW2Client):
     ...
 ```
 
-If The view signature presents the `access_token` argument, the access token
-will be supplied. Anyway you can retrieve de access token from the session,
-under the key `oauth_access_token`.
+Your view must expect an `api_client` as argument – see bellow. Anyway you can
+retrieve de access token from the session, under the key `oauth_access_token`.
 
 In order to logout, use the app route `signout`. The query string key
 `next_url` inform where to redirect after sign out.
@@ -72,23 +72,80 @@ app.register_blueprint(oauth, url_prefix='/oauth')
 The decorator is similar to Django support:
 
 ```python
+from pw2client import PW2Client
 from pw2client.support.flask import authorization_required, oauth
 ...
 
 @app.route('/')
 @authorization_required
-def index(access_token):
+def index(api_client: PW2Client):
     ...
 ```
 
-If The view signature presents the `access_token` argument, the access token
-will be supplied. Anyway you can retrieve de access token from the session,
-under the key `oauth_access_token`.
+Your view must expect an `api_client` as argument – see bellow. Anyway you can
+retrieve de access token from the session, under the key `oauth_access_token`.
 
 In order to logout, use the blueprint route `signout`. The query string key
 `next_url` inform where to redirect after sign out.
 
-## TODO
+## API client
 
-- Sign out view for Django and Flask
-- API access
+The API client is resposible for dealing with PW2 API.
+
+You can get it this way:
+
+```python
+api_client = PW2Client.from_oauth(
+    client.get_access_token(code),
+    client=client,
+)
+```
+
+Where `client` is the OAuth client and `code` is the access grant code.
+
+But, if you are using a framework support, you don’t need to do it: views
+decorated by `authorization_required` will receive an API client ready to use.
+
+### Resource API
+
+The API client attributes:
+
+- `access_token: str` - the access token
+- `id: str` – the client id
+- `secret: str` – the client secret
+- `server: urllib.parse.ParseResult` – the PW2 server
+- `personal_info: PersonalInfo` – the user’s personal data
+- `professional_info: ProfessionalInfo` – the user’s professional data
+- `emails: Emails` – a dictionary containing user id and the its e-mails list
+- `contacts: Contacts` – a dictionary containing user id and its phone numbers and
+  eventually other contacts
+
+The classes `PersonalInfo`, `ProfessionalInfo`, `Emails` and `Contacts` are
+built on demand metaprogrammatically, and have an `id` attribute (`uuid.UUID`)
+at least.
+
+Other attributes you may expect:
+
+- `PersonalInfo`
+    - `name: str`
+    - `nickname: str`
+    - `email: str`
+    - `birth: datetime.date`
+    - `gender: str`
+    - `language: str`
+    - `picture: str`
+    - `timezone: str`
+    - `country: str`
+    - `city: str`
+    - `bio: str`
+
+- `ProfessionalInfo`
+    - `profession: str`
+    - `company: str`
+    - `position: str`
+
+- `Emails`
+    - `emails: List[str]`
+
+- `Contacts`:
+    - `phone_numbers: List[str]`

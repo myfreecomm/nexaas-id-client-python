@@ -16,6 +16,7 @@ setup(
     long_description = '',
     test_suite = 'tests',
     install_requires = [
+        'python-dateutil>=2.7.0',
         'requests>=2.19.0',
     ],
     tests_require=[

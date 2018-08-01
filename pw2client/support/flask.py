@@ -1,6 +1,7 @@
 from functools import wraps
 import inspect
 from flask import Blueprint, current_app, redirect, request, session, url_for
+from pw2client import PW2Client
 from ..oauth_client import PW2OAuthClient
 
 __all__ = ['authorization_required', 'oauth']
@@ -14,8 +15,10 @@ def authorization_required(wrapped):
     def wrapper(*args, **kwargs):
         if 'oauth_access_token' not in session:
             return redirect(url_for('pw2_oauth.signin'))
-        if 'access_token' in inspect.signature(wrapped).parameters:
-            kwargs['access_token'] = session['oauth_access_token']
+        kwargs['api_client'] = PW2Client.from_oauth(
+            session['oauth_access_token'],
+            client=get_client(),
+        )
         return wrapped(*args, **kwargs)
     return wrapper
 
