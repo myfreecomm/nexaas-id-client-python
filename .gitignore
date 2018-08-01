@@ -1,0 +1,13 @@
+*.bak
+*.egg-info
+*.log
+*.pyc
+*.pyo
+*~
+.*
+/_build
+/build
+/dist
+/distribute*.tar.gz
+__pycache__
+tmp

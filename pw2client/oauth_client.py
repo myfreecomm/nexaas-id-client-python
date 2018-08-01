@@ -1,4 +1,3 @@
-from json.decoder import JSONDecodeError
 import re
 import requests
 from typing import NamedTuple
@@ -60,5 +59,7 @@ class PW2OAuthClient(BaseOAuthClient):
         try:
             return res.json()['access_token']
 
-        except (JSONDecodeError, KeyError):
-            raise ValueError('no access token supplied')
+        except (ValueError, KeyError) as exc:
+            new_exc = ValueError('no access token supplied')
+            new_exc.__context__ = exc
+            raise new_exc

@@ -26,15 +26,23 @@ class FlaskSupportTest(TestCase):
     def test_redirect_to_authorization_url(self):
         res = requests.get('http://localhost:3030/')
         self.assertEqual(res.status_code, 200)
-        self.assertListEqual([r.url for r in res.history], [
+        history = [r.url for r in res.history]
+        last_url = history[-1]
+        self.assertListEqual(history, [
             'http://localhost:3030/',
             'http://localhost:3030/oauth/signin',
-            'http://localhost:3000/oauth/authorize?'
-            'response_type=code&'
-            'client_id=QJDSMPTJWNFPZJ6WINEKJ2CZ5A&'
-            'redirect_uri=http%3A%2F%2Flocalhost%3A3030%2Foauth%2Fcallback&'
-            'scope=profile'
+            last_url,
         ])
+        last_url = urlparse(last_url)
+        self.assertEqual(last_url.scheme, 'http')
+        self.assertEqual(last_url.netloc, 'localhost:3000')
+        self.assertEqual(last_url.path, '/oauth/authorize')
+        self.assertEqual(parse_qs(last_url.query), {
+            'response_type': ['code'],
+            'client_id': ['QJDSMPTJWNFPZJ6WINEKJ2CZ5A'],
+            'redirect_uri': ['http://localhost:3030/oauth/callback'],
+            'scope':[ 'profile'],
+        })
         self.assertEqual(res.url, 'http://localhost:3000/sign_in')
 
     @skip('TODO: test the flow')

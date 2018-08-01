@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name = 'pw1-client',
+    name = 'pw2client',
     version = '1.0',
     author = 'Rodrigo Cacilhas',
     author_email = 'rodrigo.cacilhas@nexaas.com',
@@ -28,7 +28,7 @@ setup(
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',
         'License :: Other/Proprietary License',
-        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3 :: Only',
         'Topic :: Utilities',
     ],
