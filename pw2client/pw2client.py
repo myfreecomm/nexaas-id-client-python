@@ -5,6 +5,8 @@ from urllib.parse import ParseResult, urlencode, urlparse
 from uuid import UUID
 import dateutil.parser
 import requests
+from requests.auth import AuthBase
+from requests.models import Request
 from .oauth_client import PW2OAuthClient
 
 __all__ = ['PW2Client']
@@ -37,72 +39,72 @@ class PW2Client:
                  server: Union[str, ParseResult] = None):
         server = server if isinstance(server, ParseResult) \
             else urlparse(server or 'http://localhost:3000/')
-        server = server._replace(
-            query=urlencode({'access_token': access_token}),
-        )
         self.__internal_tuple = ClientProps(access_token, id, secret, server)
         self.reset()
 
     def __get_response(self, path) -> dict:
-        res = requests.get(self.server._replace(path=path).geturl())
+        res = requests.get(
+            self.server._replace(path=path).geturl(),
+            auth=HTTPBearerAuth(self.access_token),
+        )
         res.raise_for_status()
         return res.json(object_hook=_json_decode)
 
     @property
-    def access_token(self):
+    def access_token(self) -> str:
         return self.__internal_tuple.access_token
 
     @property
-    def id(self):
+    def id(self) -> str:
         return self.__internal_tuple.id
 
     @property
-    def secret(self):
+    def secret(self) -> str:
         return self.__internal_tuple.secret
 
     @property
-    def server(self):
+    def server(self) -> ParseResult:
         return self.__internal_tuple.server
 
     @property
-    def personal_info(self):
+    def personal_info(self) -> 'PersonalInfo':
         if self._personal_info is None:
             info = self.__get_response(path='/api/v1/profile')
-            self._personal_info = _build_tuple('PersonalInfo', **info)
+            self._personal_info = _build_tuple('PersonalInfo', info)
         return self._personal_info
 
     @property
-    def professional_info(self):
+    def professional_info(self) -> 'ProfessionalInfo':
         if self._professional_info is None:
             info = self.__get_response(
                 path='/api/v1/profile/professional_info'
             )
-            self._professional_info = _build_tuple('ProfessionalInfo', **info)
+            self._professional_info = _build_tuple('ProfessionalInfo', info)
         return self._professional_info
 
     @property
-    def emails(self):
+    def emails(self) -> 'Emails':
         if self._emails is None:
             info = self.__get_response(path='/api/v1/profile/emails')
-            self._emails = _build_tuple('Emails', **info)
+            self._emails = _build_tuple('Emails', info)
         return self._emails
 
     @property
-    def contacts(self):
+    def contacts(self) -> 'Contacts':
         if self._contacts is None:
             info = self.__get_response(path='/api/v1/profile/contacts')
-            self._contacts = _build_tuple('Contacts', **info)
+            self._contacts = _build_tuple('Contacts', info)
         return self._contacts
 
-    def reset(self):
+    def reset(self) -> None:
         self._personal_info = None
         self._professional_info = None
         self._emails = None
         self._contacts = None
 
 
-def _build_tuple(_class_name: str, **info) -> tuple:
-    info_class = namedtuple(_class_name, info.keys())
+def _build_tuple(class_name: str, info: dict) -> tuple:
+    info_class = namedtuple(class_name, info.keys())
     return info_class(**info)
 
 
@@ -124,11 +126,24 @@ def _json_decode(value):
     return value
 
 
-def _is_date(value):
+class HTTPBearerAuth(AuthBase):
+
+    def __init__(self, token: str):
+        self.token = token
+
+    def __eq__(self, other: 'HTTPBearerAuth') -> bool:
+        return self.token == other.token
+
+    def __call__(self, r: Request) -> Request:
+        r.headers['Authorization'] = 'Bearer {}'.format(self.token)
+        return r
+
+
+def _is_date(value: str) -> bool:
     return re.match(r'^\d{4}-\d\d-\d\d$', value) is not None
 
 
-def _is_datetime(value):
+def _is_datetime(value: str) -> bool:
     return re.match(
         r'^\d{4}-\d\d-\d\d'
         r'[T ]\d\d:\d\d:\d\d(\.\d{3})?'
@@ -137,7 +152,7 @@ def _is_datetime(value):
     ) is not None
 
 
-def _is_uuid(value):
+def _is_uuid(value: str) -> bool:
     return re.match(
         r'^[0-9a-f]{8}-'
         r'[0-9a-f]{4}-'
