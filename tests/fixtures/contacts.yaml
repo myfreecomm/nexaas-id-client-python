@@ -1,0 +1,21 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Bearer 35822300c02a679292f2dda5069aa4a997419dc114637dc8aae62f55394a52b0]
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.19.1]
+    method: GET
+    uri: http://localhost:3000/api/v1/profile/contacts
+  response:
+    body: {string: '{"id":"9680f8e1-ff10-46b5-bedb-f4545adabfca","phone_numbers":["+55-21-999999999"]}'}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Type: [application/json; charset=utf-8]
+      ETag: [W/"06ae0f2267f2a41486d30b04691772c7"]
+      X-Request-Id: [99c6590b-0e88-4421-9bd3-270eac3a26f1]
+      X-Runtime: ['0.031996']
+    status: {code: 200, message: OK}
+version: 1

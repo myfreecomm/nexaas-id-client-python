@@ -1,0 +1,23 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Bearer 35822300c02a679292f2dda5069aa4a997419dc114637dc8aae62f55394a52b0]
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.19.1]
+    method: GET
+    uri: http://localhost:3000/api/v1/profile/professional_info
+  response:
+    body: {string: "{\"id\":\"9680f8e1-ff10-46b5-bedb-f4545adabfca\",\"profession\"\
+        :\"Desenvolvedor\",\"company\":\"NexaaS\",\"position\":\"Analista de Desenvolvimento\
+        \ S\xEAnior I\"}"}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Type: [application/json; charset=utf-8]
+      ETag: [W/"273309badf0fb186fa28b090bcdc09f4"]
+      X-Request-Id: [efd69937-6c92-4fff-b58e-e5453f4cb298]
+      X-Runtime: ['0.005144']
+    status: {code: 200, message: OK}
+version: 1
