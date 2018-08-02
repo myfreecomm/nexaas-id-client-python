@@ -87,3 +87,11 @@ class TestPW2Client(TestCase):
             info.phone_numbers,
             ['+55-21-999999999'],
         )
+
+    @vcr.use_cassette('invite.yaml')
+    def test_invite(self):
+        client = self.build_api_client()
+        info = client.invite('blablabla@example.com')
+        self.assertEqual(info.requester, UUID('9680f8e1-ff10-46b5-bedb-f4545adabfca'))
+        self.assertEqual(info.email, 'blablabla@example.com')
+        self.assertEqual(info.id, UUID('813500b4-ab60-41ce-a036-61563aec297d'))
