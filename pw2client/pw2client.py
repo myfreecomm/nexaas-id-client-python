@@ -42,9 +42,18 @@ class PW2Client:
         self.__internal_tuple = ClientProps(access_token, id, secret, server)
         self.reset()
 
-    def __get_response(self, path) -> dict:
+    def __get_response(self, path: str) -> dict:
         res = requests.get(
             self.server._replace(path=path).geturl(),
+            auth=HTTPBearerAuth(self.access_token),
+        )
+        res.raise_for_status()
+        return res.json(object_hook=_json_decode)
+
+    def __post_response(self, path: str, data: dict) -> dict:
+        res = requests.post(
+            self.server._replace(path=path).geturl(),
+            json=data,
             auth=HTTPBearerAuth(self.access_token),
         )
         res.raise_for_status()
@@ -95,6 +104,18 @@ class PW2Client:
             info = self.__get_response(path='/api/v1/profile/contacts')
             self._contacts = _build_tuple('Contacts', info)
         return self._contacts
+
+    @property
+    def navbar_url(self) -> str:
+        return self.server._replace(
+            path='/api/v1/widgets/navbar.js',
+            query=urlencode({'access_token': self.access_token}),
+        ).geturl()
+
+    def invite(self, email: str) -> 'Invitation':
+        info = self.__post_response('/api/v1/sign_up', {'invited': email})
+        return _build_tuple('Invitation', info)
+
 
     def reset(self) -> None:
         self._personal_info = None

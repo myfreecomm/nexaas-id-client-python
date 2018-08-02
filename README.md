@@ -117,12 +117,14 @@ The API client attributes:
 - `personal_info: PersonalInfo` – the user’s personal data
 - `professional_info: ProfessionalInfo` – the user’s professional data
 - `emails: Emails` – a dictionary containing user id and the its e-mails list
-- `contacts: Contacts` – a dictionary containing user id and its phone numbers and
-  eventually other contacts
+- `contacts: Contacts` – a dictionary containing user id and its phone numbers
+  and eventually other contacts
+- `invite(email: str) -> Invitation` – invite another user to the current
+  application
 
-The classes `PersonalInfo`, `ProfessionalInfo`, `Emails` and `Contacts` are
-built on demand metaprogrammatically, and have an `id` attribute (`uuid.UUID`)
-at least.
+The classes `PersonalInfo`, `ProfessionalInfo`, `Emails`, `Contacts` and
+`Invitation` are built on demand metaprogrammatically, and have an `id`
+attribute (`uuid.UUID`) at least.
 
 Other attributes you may expect:
 
@@ -149,3 +151,7 @@ Other attributes you may expect:
 
 - `Contacts`:
     - `phone_numbers: List[str]`
+
+- `Invitation`:
+    - `email` (invited user)
+    - `requester` (inviter id)

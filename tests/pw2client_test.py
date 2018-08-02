@@ -21,6 +21,11 @@ class TestPW2Client(TestCase):
         self.assertEqual(client.secret, 'secret')
         self.assertEqual(client.server.netloc, 'localhost:3000')
         self.assertEqual(client.server.path, '/')
+        self.assertEqual(
+            client.navbar_url,
+            'http://localhost:3000/api/v1/widgets/navbar.js?'
+            'access_token=the-access-token',
+        )
 
     @skip('TODO: build cassette')
     def test_personal_info(self):
