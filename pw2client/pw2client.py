@@ -124,6 +124,19 @@ class PW2Client:
         self._contacts = None
 
 
+class HTTPBearerAuth(AuthBase):
+
+    def __init__(self, token: str):
+        self.token = token
+
+    def __eq__(self, other: 'HTTPBearerAuth') -> bool:
+        return self.token == other.token
+
+    def __call__(self, r: Request) -> Request:
+        r.headers['Authorization'] = 'Bearer {}'.format(self.token)
+        return r
+
+
 def _build_tuple(class_name: str, info: dict) -> tuple:
     info_class = namedtuple(class_name, info.keys())
     return info_class(**info)
@@ -145,19 +158,6 @@ def _json_decode(value):
         return {k: _json_decode(v) for k, v in value.items()}
 
     return value
-
-
-class HTTPBearerAuth(AuthBase):
-
-    def __init__(self, token: str):
-        self.token = token
-
-    def __eq__(self, other: 'HTTPBearerAuth') -> bool:
-        return self.token == other.token
-
-    def __call__(self, r: Request) -> Request:
-        r.headers['Authorization'] = 'Bearer {}'.format(self.token)
-        return r
 
 
 def _is_date(value: str) -> bool:
