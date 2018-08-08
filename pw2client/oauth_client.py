@@ -38,16 +38,18 @@ class PW2OAuthClient(BaseOAuthClient):
             query=query,
         ).geturl()
 
-    def get_access_token(self, code: str) -> str:
+    def get_access_token(self, code: str = None) -> str:
+        post_data = {
+            'client_id': self.id,
+            'client_secret': self.secret,
+            'redirect_uri': self.redirect_uri,
+            'grant_type': 'authorization_code' if code else 'client_credentials',
+        }
+        if code:
+            post_data['code'] = code
         res = requests.post(
             self.server._replace(path='/oauth/token').geturl(),
-            {
-                'client_id': self.id,
-                'client_secret': self.secret,
-                'redirect_uri': self.redirect_uri,
-                'grant_type': 'authorization_code',
-                'code': code,
-            },
+            post_data,
         )
         res.raise_for_status()
         try:
