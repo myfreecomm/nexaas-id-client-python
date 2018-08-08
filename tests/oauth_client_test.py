@@ -47,20 +47,27 @@ class TestPW2OAuthClient(TestCase):
     @vcr.use_cassette('authorized.yaml')
     def test_get_access_token_success(self):
         client = PW2OAuthClient('client', 'secret',
-                           redirect_uri='http://localhost/callback')
+                                redirect_uri='http://localhost/callback')
         token = client.get_access_token('the-access-grant-code')
         self.assertEqual(token, 'some-valid-access-token')
 
     @vcr.use_cassette('forbidden.yaml')
     def test_get_access_forbidden(self):
         client = PW2OAuthClient('client', 'secret',
-                           redirect_uri='http://localhost/callback')
+                                redirect_uri='http://localhost/callback')
         with self.assertRaises(HTTPError):
             client.get_access_token('the-access-grant-code')
 
     @vcr.use_cassette('empty.yaml')
     def test_get_access_token_empty(self):
         client = PW2OAuthClient('client', 'secret',
-                           redirect_uri='http://localhost/callback')
+                                redirect_uri='http://localhost/callback')
         with self.assertRaises(ValueError):
             client.get_access_token('the-access-grant-code')
+
+    @vcr.use_cassette('client-credentials.yaml')
+    def test_get_client_credentials_success(self):
+        client = PW2OAuthClient('client', 'secret',
+                                redirect_uri='http://localhost/callback')
+        token = client.get_access_token()
+        self.assertEqual(token, 'client-credentials-access-token')
