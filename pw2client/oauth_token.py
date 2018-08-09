@@ -46,14 +46,21 @@ class TokenSerializer:
     @staticmethod
     def serialize(token: AbstractToken) -> str:
         return urlencode({
-            attr: getattr(self, attr)
+            attr: getattr(token, attr) or ''
             for attr in AbstractToken.Base._fields
         })
 
     @staticmethod
     def deserialize(token: str) -> AbstractToken:
-        return OAuthToken(**{
-            attr: value
+        resource = {
+            attr: value or None
             for attr, value in parse_qsl(token)
             if attr in AbstractToken.Base._fields
-        })
+        }
+
+        if resource.get('expires_at'):
+            resource['expires_at'] = datetime.strptime(
+                resource['expires_at'],
+                r'%Y-%m-%d %H:%M:%S',
+            ).timestamp()
+        return OAuthToken(**resource)

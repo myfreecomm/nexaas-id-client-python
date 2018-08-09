@@ -69,3 +69,83 @@ class TestOAuthToken(TestCase):
         self.assertEqual(token.access_token, 'atoken')
         self.assertIsNone(token.refresh_token)
         self.assertEqual(token.expires_at, datetime(2018, 1, 1, 12, 5))
+
+
+class TestTokenSerializerSerialize(TestCase):
+
+    Token = namedtuple('Token', 'access_token refresh_token expires_at')
+
+    def test_serialize_empty(self):
+        token = self.Token('tk1', None, None)
+        self.assertEqual(
+            TokenSerializer.serialize(token),
+            'access_token=tk1&refresh_token=&expires_at=',
+        )
+
+    def test_serialize_refresh_token(self):
+        token = self.Token('access-token', 'refresh-token', None)
+        self.assertEqual(
+            TokenSerializer.serialize(token),
+            'access_token=access-token&'
+            'refresh_token=refresh-token&'
+            'expires_at=',
+        )
+
+    def test_serialize_expires_at(self):
+        token = self.Token('the-token', None, datetime(2100, 10, 10, 10, 10))
+        self.assertEqual(
+            TokenSerializer.serialize(token),
+            'access_token=the-token&'
+            'refresh_token=&'
+            'expires_at=2100-10-10+10%3A10%3A00',
+        )
+
+    def test_full_serialization(self):
+        token = self.Token('access-token', 'refresh-token', datetime(1970, 1, 1))
+        self.assertEqual(
+            TokenSerializer.serialize(token),
+            'access_token=access-token&'
+            'refresh_token=refresh-token&'
+            'expires_at=1970-01-01+00%3A00%3A00',
+        )
+
+
+class TestTokenSerializerDeserialize(TestCase):
+
+    def test_deserialize_empty(self):
+        token = TokenSerializer.deserialize(
+            'access_token=tk1&refresh_token=&expires_at='
+        )
+        self.assertEqual(token.access_token, 'tk1')
+        self.assertIsNone(token.refresh_token)
+        self.assertIsNone(token.expires_at)
+
+    def test_deserialize_refresh_token(self):
+        token = TokenSerializer.deserialize(
+            'access_token=access-token&'
+            'refresh_token=refresh-token&'
+            'expires_at='
+        )
+        self.assertEqual(token.access_token, 'access-token')
+        self.assertEqual(token.refresh_token, 'refresh-token')
+        self.assertIsNone(token.expires_at)
+
+    def test_serialize_expires_at(self):
+        token = TokenSerializer.deserialize(
+            'access_token=the-token&'
+            'refresh_token=&'
+            'expires_at=2100-10-10+10%3A10%3A00'
+        )
+        self.assertEqual(token.access_token, 'the-token')
+        self.assertIsNone(token.refresh_token)
+        self.assertEqual(token.expires_at, datetime(2100, 10, 10, 10, 10))
+
+    def test_full_serialization(self):
+        token = TokenSerializer.deserialize(
+            'access_token=access-token&'
+            'refresh_token=refresh-token&'
+            'expires_at=1970-01-01+00%3A00%3A00'
+        )
+        self.assertEqual(token.access_token, 'access-token')
+        self.assertEqual(token.refresh_token, 'refresh-token')
+        self.assertEqual(token.expires_at, datetime(1970, 1, 1))
