@@ -3,7 +3,7 @@ from collections import namedtuple
 from datetime import datetime, timedelta
 from urllib.parse import parse_qsl, urlencode
 
-__all__ = ['AbstractToken', 'OAuthToken']
+__all__ = ['AbstractToken', 'OAuthToken', 'TokenSerializer']
 
 
 class AbstractToken(metaclass=ABCMeta):
@@ -27,8 +27,8 @@ class OAuthToken(AbstractToken.Base):
                 expires_at: int = -1,
                 expires_in: int = -1, **__) -> AbstractToken.Base:
         if expires_at >= 0:
-            expires_at = datetime.fromordinal(expires_at)
-        elif expires_in >= -1:
+            expires_at = datetime.fromtimestamp(expires_at)
+        elif expires_in >= 0:
             expires_at = datetime.now() + timedelta(seconds=expires_in)
         else:
             expires_at = None
