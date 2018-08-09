@@ -4,10 +4,10 @@ from datetime import datetime, timedelta
 from typing import Union
 from urllib.parse import parse_qsl, urlencode
 
-__all__ = ['AbstractToken', 'TokenSerializer']
+__all__ = ['OAuthToken', 'TokenSerializer']
 
 
-class AbstractToken(metaclass=ABCMeta):
+class OAuthToken(metaclass=ABCMeta):
 
     Base = namedtuple(
         'OAuthToken',
@@ -23,14 +23,14 @@ class AbstractToken(metaclass=ABCMeta):
 
     @staticmethod
     def build(*args, **kwargs) -> Base:
-        return OAuthToken(*args, **kwargs)
+        return MainOAuthToken(*args, **kwargs)
 
 
-class OAuthToken(AbstractToken.Base):
+class MainOAuthToken(OAuthToken.Base):
 
     def __new__(cls, access_token: str, refresh_token: str = None,
                 expires_at: Union[int, datetime] = -1,
-                expires_in: int = -1, **__) -> AbstractToken.Base:
+                expires_in: int = -1, **__) -> OAuthToken.Base:
         if not isinstance(expires_at, datetime):
             if expires_at >= 0:
                 expires_at = datetime.fromtimestamp(expires_at)
@@ -44,24 +44,24 @@ class OAuthToken(AbstractToken.Base):
     def expired(self) -> bool:
         return self.expires_at < datetime.now()
 
-AbstractToken.register(OAuthToken)
+OAuthToken.register(MainOAuthToken)
 
 
 class TokenSerializer:
 
     @staticmethod
-    def serialize(token: AbstractToken) -> str:
+    def serialize(token: OAuthToken) -> str:
         return urlencode({
             attr: getattr(token, attr) or ''
-            for attr in AbstractToken.Base._fields
+            for attr in OAuthToken.Base._fields
         })
 
     @staticmethod
-    def deserialize(token: str) -> AbstractToken:
+    def deserialize(token: str) -> OAuthToken:
         resource = {
             attr: value or None
             for attr, value in parse_qsl(token)
-            if attr in AbstractToken.Base._fields
+            if attr in OAuthToken.Base._fields
         }
 
         if resource.get('expires_at'):
@@ -69,4 +69,4 @@ class TokenSerializer:
                 resource['expires_at'],
                 r'%Y-%m-%d %H:%M:%S',
             )
-        return AbstractToken.build(**resource)
+        return OAuthToken.build(**resource)

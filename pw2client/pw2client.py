@@ -8,7 +8,7 @@ import requests
 from requests.auth import AuthBase
 from requests.models import Request
 from .oauth_client import PW2OAuthClient
-from .oauth_token import AbstractToken
+from .oauth_token import OAuthToken
 
 __all__ = ['PW2Client']
 
@@ -26,7 +26,7 @@ class PW2Client:
     )
 
     @classmethod
-    def from_oauth(cls, token: AbstractToken, *,
+    def from_oauth(cls, token: OAuthToken, *,
                    client: PW2OAuthClient) -> 'PW2Client':
         return cls(
             token=token,
@@ -35,13 +35,13 @@ class PW2Client:
             server=client.server,
         )
 
-    def __init__(self, token: Union[str, AbstractToken], *,
+    def __init__(self, token: Union[str, OAuthToken], *,
                  id: str = None, secret: str = None,
                  server: Union[str, ParseResult] = None):
         server = server if isinstance(server, ParseResult) \
             else urlparse(server or 'http://localhost:3000/')
-        token = token if isinstance(token, AbstractToken) \
-            else AbstractToken.build(access_token=token)
+        token = token if isinstance(token, OAuthToken) \
+            else OAuthToken.build(access_token=token)
         self.__internal_tuple = ClientProps(token, id, secret, server)
         self.reset()
 

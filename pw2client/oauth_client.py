@@ -2,7 +2,7 @@ import re
 import requests
 from collections import namedtuple
 from urllib.parse import ParseResult, urlencode, urlparse
-from .oauth_token import AbstractToken
+from .oauth_token import OAuthToken
 
 __all__ = ['PW2OAuthClient']
 
@@ -39,7 +39,7 @@ class PW2OAuthClient(BaseOAuthClient):
             query=query,
         ).geturl()
 
-    def __get_oauth_token(self, **kwargs) -> AbstractToken:
+    def __get_oauth_token(self, **kwargs) -> OAuthToken:
         post_data = {
             'client_id': self.id,
             'client_secret': self.secret,
@@ -52,14 +52,14 @@ class PW2OAuthClient(BaseOAuthClient):
         )
         res.raise_for_status()
         try:
-            return AbstractToken.build(**res.json())
+            return OAuthToken.build(**res.json())
 
         except (ValueError, KeyError) as exc:
             new_exc = ValueError('no access token supplied')
             new_exc.__context__ = exc
             raise new_exc
 
-    def get_token(self, code: str = None) -> AbstractToken:
+    def get_token(self, code: str = None) -> OAuthToken:
         if code:
             return self.__get_oauth_token(
                 grant_type='authorization_code',
@@ -68,7 +68,7 @@ class PW2OAuthClient(BaseOAuthClient):
         else:
             return self.__get_oauth_token(grant_type='client_credentials')
 
-    def refresh_token(self, token: AbstractToken) -> AbstractToken:
+    def refresh_token(self, token: OAuthToken) -> OAuthToken:
         return self.__get_oauth_token(
             grant_type='refresh_token',
             refresh_token=token.refresh_token,

@@ -3,7 +3,7 @@ import inspect
 from flask import Blueprint, current_app, redirect, request, session, url_for
 from pw2client import PW2Client
 from ..oauth_client import PW2OAuthClient
-from ..oauth_token import AbstractToken, TokenSerializer
+from ..oauth_token import OAuthToken, TokenSerializer
 
 __all__ = ['authorization_required', 'oauth']
 

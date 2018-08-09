@@ -2,23 +2,23 @@ from unittest import TestCase
 from unittest.mock import patch
 from collections import namedtuple
 from datetime import datetime
-from pw2client.oauth_token import AbstractToken, OAuthToken, TokenSerializer
+from pw2client.oauth_token import OAuthToken, MainOAuthToken, TokenSerializer
 
 
-class TestAbstractToken(TestCase):
+class TestOAuthToken(TestCase):
 
     def test_validate_oauth_token(self):
-        self.assertTrue(issubclass(OAuthToken, AbstractToken))
-        token = OAuthToken('test-token')
-        self.assertIsInstance(token, AbstractToken)
+        self.assertTrue(issubclass(MainOAuthToken, OAuthToken))
+        token = MainOAuthToken('test-token')
+        self.assertIsInstance(token, OAuthToken)
 
     def test_build(self):
-        token = AbstractToken.build(
+        token = OAuthToken.build(
             access_token='atoken',
             refresh_token='rtoken',
           )
+        self.assertIsInstance(token, MainOAuthToken)
         self.assertIsInstance(token, OAuthToken)
-        self.assertIsInstance(token, AbstractToken)
 
     def test_validate_unknown_class(self):
         class MyToken:
@@ -34,46 +34,46 @@ class TestAbstractToken(TestCase):
             def expires_at(self):
                 return None
 
-        self.assertTrue(issubclass(MyToken, AbstractToken))
+        self.assertTrue(issubclass(MyToken, OAuthToken))
         token = MyToken()
-        self.assertIsInstance(token, AbstractToken)
+        self.assertIsInstance(token, OAuthToken)
 
     def test_validate_named_tuple(self):
         MyToken = namedtuple('MyToken', 'access_token refresh_token expires_at')
-        self.assertTrue(issubclass(MyToken, AbstractToken))
+        self.assertTrue(issubclass(MyToken, OAuthToken))
         token = MyToken('test', None, None)
-        self.assertIsInstance(token, AbstractToken)
+        self.assertIsInstance(token, OAuthToken)
 
     def test_missing_attribute(self):
         NotToken = namedtuple('NotToken', 'refresh_token other')
-        self.assertFalse(issubclass(NotToken, AbstractToken))
+        self.assertFalse(issubclass(NotToken, OAuthToken))
         not_token = NotToken(None, None)
-        self.assertNotIsInstance(not_token, AbstractToken)
+        self.assertNotIsInstance(not_token, OAuthToken)
 
 
-class TestOAuthToken(TestCase):
+class TestMainOAuthToken(TestCase):
 
     def test_default_values(self):
-        token = OAuthToken(access_token='some-token')
+        token = MainOAuthToken(access_token='some-token')
         self.assertEqual(token.access_token, 'some-token')
         self.assertIsNone(token.refresh_token)
         self.assertIsNone(token.expires_at)
 
     def test_refresh_token(self):
-        token = OAuthToken(access_token='token1', refresh_token='token2')
+        token = MainOAuthToken(access_token='token1', refresh_token='token2')
         self.assertEqual(token.access_token, 'token1')
         self.assertEqual(token.refresh_token, 'token2')
         self.assertIsNone(token.expires_at)
 
     def test_expires_at(self):
-        token = OAuthToken(access_token='token1', expires_at=1533846605)
+        token = MainOAuthToken(access_token='token1', expires_at=1533846605)
         self.assertEqual(token.access_token, 'token1')
         self.assertIsNone(token.refresh_token)
         self.assertEqual(token.expires_at, datetime(2018, 8, 9, 17, 30, 5))
 
     @patch('datetime.datetime.now', return_value=datetime(2018, 1, 1, 12, 0))
     def test_expires_in(self, _now):
-        token = OAuthToken(access_token='atoken', expires_in=300)
+        token = MainOAuthToken(access_token='atoken', expires_in=300)
         self.assertEqual(token.access_token, 'atoken')
         self.assertIsNone(token.refresh_token)
         self.assertEqual(token.expires_at, datetime(2018, 1, 1, 12, 5))
