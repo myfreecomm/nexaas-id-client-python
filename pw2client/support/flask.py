@@ -3,6 +3,7 @@ import inspect
 from flask import Blueprint, current_app, redirect, request, session, url_for
 from pw2client import PW2Client
 from ..oauth_client import PW2OAuthClient
+from ..oauth_token import AbstractToken, TokenSerializer
 
 __all__ = ['authorization_required', 'oauth']
 
@@ -13,10 +14,10 @@ oauth = Blueprint('pw2_oauth', __name__)
 def authorization_required(wrapped):
     @wraps(wrapped)
     def wrapper(*args, **kwargs):
-        if 'oauth_access_token' not in session:
+        if 'oauth_token' not in session:
             return redirect(url_for('pw2_oauth.signin'))
         kwargs['api_client'] = PW2Client.from_oauth(
-            session['oauth_access_token'],
+            TokenSerializer.deserialize(session['oauth_token']),
             client=get_client(),
         )
         return wrapped(*args, **kwargs)
@@ -34,8 +35,8 @@ def signin():
 
 @oauth.route('/signout')
 def signout():
-    if 'oauth_access_token' in session:
-        del session['oauth_access_token']
+    if 'oauth_token' in session:
+        del session['oauth_token']
     next_url = request.args.get('next_url') or \
                session.get('oauth_next_url') or \
                request.headers.get('Referer') or \
@@ -47,7 +48,7 @@ def signout():
 def callback():
     client = get_client()
     code = request.args.get('code')
-    session['oauth_access_token'] = client.get_access_token(code)
+    session['oauth_token'] = TokenSerializer.serialize(client.get_token(code))
     next_url = session.get('oauth_next_url')
     if next_url:
         del session['oauth_next_url']
