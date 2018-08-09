@@ -1,6 +1,7 @@
 from abc import ABCMeta
 from collections import namedtuple
 from datetime import datetime, timedelta
+from typing import Union
 from urllib.parse import parse_qsl, urlencode
 
 __all__ = ['AbstractToken', 'OAuthToken', 'TokenSerializer']
@@ -24,14 +25,15 @@ class AbstractToken(metaclass=ABCMeta):
 class OAuthToken(AbstractToken.Base):
 
     def __new__(cls, access_token: str, refresh_token: str = None,
-                expires_at: int = -1,
+                expires_at: Union[int, datetime] = -1,
                 expires_in: int = -1, **__) -> AbstractToken.Base:
-        if expires_at >= 0:
-            expires_at = datetime.fromtimestamp(expires_at)
-        elif expires_in >= 0:
-            expires_at = datetime.now() + timedelta(seconds=expires_in)
-        else:
-            expires_at = None
+        if not isinstance(expires_at, datetime):
+            if expires_at >= 0:
+                expires_at = datetime.fromtimestamp(expires_at)
+            elif expires_in >= 0:
+                expires_at = datetime.now() + timedelta(seconds=expires_in)
+            else:
+                expires_at = None
         return super().__new__(cls, access_token, refresh_token, expires_at)
 
     @property
@@ -62,5 +64,5 @@ class TokenSerializer:
             resource['expires_at'] = datetime.strptime(
                 resource['expires_at'],
                 r'%Y-%m-%d %H:%M:%S',
-            ).timestamp()
+            )
         return OAuthToken(**resource)
