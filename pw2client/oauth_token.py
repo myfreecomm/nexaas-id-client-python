@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from typing import Union
 from urllib.parse import parse_qsl, urlencode
 
-__all__ = ['AbstractToken', 'OAuthToken', 'TokenSerializer']
+__all__ = ['AbstractToken', 'TokenSerializer']
 
 
 class AbstractToken(metaclass=ABCMeta):
@@ -20,6 +20,10 @@ class AbstractToken(metaclass=ABCMeta):
             if not any(attr in B.__dict__ for B in C.__mro__):
                 return NotImplemented
         return True
+
+    @staticmethod
+    def build(*args, **kwargs) -> Base:
+        return OAuthToken(*args, **kwargs)
 
 
 class OAuthToken(AbstractToken.Base):
@@ -65,4 +69,4 @@ class TokenSerializer:
                 resource['expires_at'],
                 r'%Y-%m-%d %H:%M:%S',
             )
-        return OAuthToken(**resource)
+        return AbstractToken.build(**resource)

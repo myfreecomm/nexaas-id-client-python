@@ -2,7 +2,7 @@ import re
 import requests
 from collections import namedtuple
 from urllib.parse import ParseResult, urlencode, urlparse
-from .oauth_token import AbstractToken, OAuthToken
+from .oauth_token import AbstractToken
 
 __all__ = ['PW2OAuthClient']
 
@@ -52,7 +52,7 @@ class PW2OAuthClient(BaseOAuthClient):
         )
         res.raise_for_status()
         try:
-            return OAuthToken(**res.json())
+            return AbstractToken.build(**res.json())
 
         except (ValueError, KeyError) as exc:
             new_exc = ValueError('no access token supplied')

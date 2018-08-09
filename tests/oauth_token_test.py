@@ -12,6 +12,14 @@ class TestAbstractToken(TestCase):
         token = OAuthToken('test-token')
         self.assertIsInstance(token, AbstractToken)
 
+    def test_build(self):
+        token = AbstractToken.build(
+            access_token='atoken',
+            refresh_token='rtoken',
+          )
+        self.assertIsInstance(token, OAuthToken)
+        self.assertIsInstance(token, AbstractToken)
+
     def test_validate_unknown_class(self):
         class MyToken:
             @property

@@ -8,7 +8,7 @@ import requests
 from requests.auth import AuthBase
 from requests.models import Request
 from .oauth_client import PW2OAuthClient
-from .oauth_token import AbstractToken, OAuthToken
+from .oauth_token import AbstractToken
 
 __all__ = ['PW2Client']
 
@@ -41,7 +41,7 @@ class PW2Client:
         server = server if isinstance(server, ParseResult) \
             else urlparse(server or 'http://localhost:3000/')
         token = token if isinstance(token, AbstractToken) \
-            else OAuthToken(access_token=token)
+            else AbstractToken.build(access_token=token)
         self.__internal_tuple = ClientProps(token, id, secret, server)
         self.reset()
 
