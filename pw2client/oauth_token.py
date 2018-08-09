@@ -14,16 +14,15 @@ class OAuthToken(metaclass=ABCMeta):
         'access_token refresh_token expires_at',
     )
 
+    def __new__(_cls, *args, **kwargs) -> Base:
+        return MainOAuthToken(*args, **kwargs)
+
     @classmethod
     def __subclasshook__(cls, C):
         for attr in cls.Base._fields:
             if not any(attr in B.__dict__ for B in C.__mro__):
                 return NotImplemented
         return True
-
-    @staticmethod
-    def build(*args, **kwargs) -> Base:
-        return MainOAuthToken(*args, **kwargs)
 
 
 class MainOAuthToken(OAuthToken.Base):
@@ -69,4 +68,4 @@ class TokenSerializer:
                 resource['expires_at'],
                 r'%Y-%m-%d %H:%M:%S',
             )
-        return OAuthToken.build(**resource)
+        return OAuthToken(**resource)

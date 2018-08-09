@@ -41,7 +41,7 @@ class PW2Client:
         server = server if isinstance(server, ParseResult) \
             else urlparse(server or 'http://localhost:3000/')
         token = token if isinstance(token, OAuthToken) \
-            else OAuthToken.build(access_token=token)
+            else OAuthToken(access_token=token)
         self.__internal_tuple = ClientProps(token, id, secret, server)
         self.reset()
 

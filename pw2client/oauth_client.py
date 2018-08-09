@@ -52,7 +52,7 @@ class PW2OAuthClient(BaseOAuthClient):
         )
         res.raise_for_status()
         try:
-            return OAuthToken.build(**res.json())
+            return OAuthToken(**res.json())
 
         except (ValueError, KeyError) as exc:
             new_exc = ValueError('no access token supplied')
