@@ -1,4 +1,4 @@
-from unittest import TestCase
+from unittest import TestCase, skip
 from requests.exceptions import HTTPError
 from urllib.parse import parse_qs, urlparse
 from ._vcr import vcr
@@ -71,3 +71,7 @@ class TestPW2OAuthClient(TestCase):
                                 redirect_uri='http://localhost/callback')
         token = client.get_token()
         self.assertEqual(token.access_token, 'client-credentials-access-token')
+
+    @skip('TODO: build cassette')
+    def test_refresh_token(self):
+        raise NotImplementedError
