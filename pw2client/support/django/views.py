@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.decorators.cache import never_cache
 from pw2client import PW2OAuthClient
+from pw2client.oauth_token import TokenSerializer
 
 __all__ = ['signin', 'callback']
 
@@ -17,8 +18,8 @@ def signin(request):
 
 def signout(request):
     session = request.session
-    if 'oauth_access_token' in session:
-        del session['oauth_access_token']
+    if 'oauth_token' in session:
+        del session['oauth_token']
     next_url = request.GET.get('next_url') or \
                session.get('oauth_next_url') or \
                request.META.get('HTTP_REFERER') or \
@@ -30,7 +31,7 @@ def callback(request):
     client = get_client(request)
     code = request.GET.get('code')
     session = request.session
-    session['oauth_access_token'] = client.get_access_token(code)
+    session['oauth_token'] = TokenSerializer.serialize(client.get_token(code))
     next_url = session.get('oauth_next_url')
     if next_url:
         del session['oauth_next_url']

@@ -8,11 +8,12 @@ import requests
 from requests.auth import AuthBase
 from requests.models import Request
 from .oauth_client import PW2OAuthClient
+from .oauth_token import OAuthToken
 
 __all__ = ['PW2Client']
 
 
-ClientProps = namedtuple('ClientProps', 'access_token id secret server')
+ClientProps = namedtuple('ClientProps', 'token id secret server')
 
 
 class PW2Client:
@@ -25,21 +26,23 @@ class PW2Client:
     )
 
     @classmethod
-    def from_oauth(cls, access_token: str, *,
+    def from_oauth(cls, token: OAuthToken, *,
                    client: PW2OAuthClient) -> 'PW2Client':
         return cls(
-            access_token=access_token,
+            token=token,
             id=client.id,
             secret=client.secret,
             server=client.server,
         )
 
-    def __init__(self, access_token: str, *,
+    def __init__(self, token: Union[str, OAuthToken], *,
                  id: str = None, secret: str = None,
                  server: Union[str, ParseResult] = None):
         server = server if isinstance(server, ParseResult) \
             else urlparse(server or 'http://localhost:3000/')
-        self.__internal_tuple = ClientProps(access_token, id, secret, server)
+        token = token if isinstance(token, OAuthToken) \
+            else OAuthToken(access_token=token)
+        self.__internal_tuple = ClientProps(token, id, secret, server)
         self.reset()
 
     def __get_response(self, path: str) -> dict:
@@ -61,7 +64,19 @@ class PW2Client:
 
     @property
     def access_token(self) -> str:
-        return self.__internal_tuple.access_token
+        return self.token.access_token
+
+    @property
+    def refresh_token(self) -> str:
+        return self.token.refresh_token
+
+    @property
+    def scope(self) -> str:
+        return self.token.scope
+
+    @property
+    def token(self) -> str:
+        return self.__internal_tuple.token
 
     @property
     def id(self) -> str:

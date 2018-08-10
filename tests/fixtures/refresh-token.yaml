@@ -1,0 +1,21 @@
+interactions:
+- request:
+    body: client_id=client&client_secret=secret&redirect_uri=http%3A%2F%2Flocalhost%2Fcallback&grant_type=authorization_code&code=the-access-grant-code
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['141']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.19.1]
+    method: POST
+    uri: http://localhost:3000/oauth/token
+  response:
+    body: {string: '{"access_token":"the-access-token","token_type":"bearer","expires_in":7200,"refresh_token":"the-refresh-token","scope":"invite","created_at":1533912833}'}
+    headers:
+      Content-Length: ['152']
+      Content-type: [application/json]
+      Date: ['Tue, 31 Jul 2018 21:28:03 GMT']
+      Server: [WSGIServer/0.2 CPython/3.6.5]
+    status: {code: 200, message: OK}
+version: 1

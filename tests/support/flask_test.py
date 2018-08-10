@@ -1,9 +1,10 @@
 from unittest import TestCase, skip
 from flask import Flask
+from logging import NullHandler
 import requests
 from threading import Thread
 from urllib.parse import parse_qs, urlparse
-from wsgiref.simple_server import make_server
+from wsgiref.simple_server import make_server, WSGIRequestHandler
 from .._vcr import vcr
 from pw2client.support.flask import authorization_required, oauth
 
@@ -12,7 +13,9 @@ class FlaskSupportTest(TestCase):
 
     @classmethod
     def setUpClass(cls):
-        httpd = cls.httpd = make_server('localhost', 3030, app)
+        httpd = cls.httpd = make_server(
+            'localhost', 3030, app, handler_class=QuietHandler,
+        )
         thr = cls._thr = Thread(target=httpd.serve_forever)
         thr.daemon = True
         thr.start()
@@ -52,6 +55,12 @@ class FlaskSupportTest(TestCase):
 
 #-------------------------------------------------------------------------------
 
+class QuietHandler(WSGIRequestHandler):
+
+    def log_message(self, format, *args):
+        pass
+
+
 app = Flask(__name__)
 app.config.update(
     PW2_CLIENT_ID='QJDSMPTJWNFPZJ6WINEKJ2CZ5A',
@@ -59,6 +68,7 @@ app.config.update(
     SECRET_KEY=b'qhfuR/NGtD4hVm9n',
     TESTING=True,
 )
+app.logger.handlers = [NullHandler()]
 app.register_blueprint(oauth, url_prefix='/oauth')
 
 @app.route('/')
