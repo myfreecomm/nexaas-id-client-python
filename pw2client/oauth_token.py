@@ -1,7 +1,6 @@
 from abc import ABCMeta
 from collections import namedtuple
 from datetime import datetime, timedelta
-from typing import Union
 from urllib.parse import parse_qsl, urlencode
 
 __all__ = ['OAuthToken', 'TokenSerializer']
