@@ -6,6 +6,10 @@ from urllib.parse import parse_qsl, urlencode
 
 __all__ = ['OAuthToken', 'TokenSerializer']
 
+# XXX: for test purpose
+# TODO: remove this when updating to python 3.5+
+_isinstance = isinstance
+
 
 class OAuthToken(metaclass=ABCMeta):
 
@@ -28,13 +32,17 @@ class OAuthToken(metaclass=ABCMeta):
 class MainOAuthToken(OAuthToken.Base):
 
     def __new__(cls, access_token: str, refresh_token: str = None,
-                expires_at: Union[int, datetime] = -1,
+                expires_at: datetime = None,
+                created_at: int = -1,
                 expires_in: int = -1, **__) -> OAuthToken.Base:
-        if not isinstance(expires_at, datetime):
-            if expires_at >= 0:
-                expires_at = datetime.fromtimestamp(expires_at)
-            elif expires_in >= 0:
-                expires_at = datetime.now() + timedelta(seconds=expires_in)
+        if not expires_at:
+            if expires_in >= 0:
+                if created_at >= 0:
+                    created_at = datetime.fromtimestamp(created_at)
+                else:
+                    created_at = datetime.now()
+                expires_at = created_at + timedelta(seconds=expires_in)
+
             else:
                 expires_at = None
         return super().__new__(cls, access_token, refresh_token, expires_at)

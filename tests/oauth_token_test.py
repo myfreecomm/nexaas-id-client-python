@@ -61,15 +61,21 @@ class TestMainOAuthToken(TestCase):
         self.assertIsNone(token.expires_at)
 
     def test_expires_at(self):
-        token = OAuthToken(access_token='token1', expires_at=1533846605)
+        token = OAuthToken(
+            access_token='token1',
+            created_at=1533846005,
+            expires_in=600,
+        )
         self.assertIsInstance(token, MainOAuthToken)
         self.assertEqual(token.access_token, 'token1')
         self.assertIsNone(token.refresh_token)
         self.assertEqual(token.expires_at, datetime(2018, 8, 9, 17, 30, 5))
 
-    @patch('datetime.datetime.now', return_value=datetime(2018, 1, 1, 12, 0))
-    def test_expires_in(self, _now):
-        token = OAuthToken(access_token='atoken', expires_in=300)
+    def test_created_at_not_supplied(self):
+        with patch('pw2client.oauth_token.datetime') as dt, \
+             patch('pw2client.oauth_token._isinstance', return_value=False):
+            dt.now.return_value = datetime(2018, 1, 1, 12, 0)
+            token = OAuthToken(access_token='atoken', expires_in=300)
         self.assertIsInstance(token, MainOAuthToken)
         self.assertEqual(token.access_token, 'atoken')
         self.assertIsNone(token.refresh_token)
@@ -83,35 +89,41 @@ class TestTokenSerializerSerialize(TestCase):
     def test_serialize_empty(self):
         token = self.Token('tk1', None, None)
         self.assertEqual(
-            TokenSerializer.serialize(token),
-            'access_token=tk1&refresh_token=&expires_at=',
+            set(TokenSerializer.serialize(token).split('&')),
+            {'access_token=tk1', 'refresh_token=', 'expires_at='},
         )
 
     def test_serialize_refresh_token(self):
         token = self.Token('access-token', 'refresh-token', None)
         self.assertEqual(
-            TokenSerializer.serialize(token),
-            'access_token=access-token&'
-            'refresh_token=refresh-token&'
-            'expires_at=',
+            set(TokenSerializer.serialize(token).split('&')),
+            {
+                'access_token=access-token',
+                'refresh_token=refresh-token',
+                'expires_at=',
+            },
         )
 
     def test_serialize_expires_at(self):
         token = self.Token('the-token', None, datetime(2100, 10, 10, 10, 10))
         self.assertEqual(
-            TokenSerializer.serialize(token),
-            'access_token=the-token&'
-            'refresh_token=&'
-            'expires_at=2100-10-10+10%3A10%3A00',
+            set(TokenSerializer.serialize(token).split('&')),
+            {
+                'access_token=the-token',
+                'refresh_token=',
+                'expires_at=2100-10-10+10%3A10%3A00',
+            },
         )
 
     def test_full_serialization(self):
         token = self.Token('access-token', 'refresh-token', datetime(1970, 1, 1))
         self.assertEqual(
-            TokenSerializer.serialize(token),
-            'access_token=access-token&'
-            'refresh_token=refresh-token&'
-            'expires_at=1970-01-01+00%3A00%3A00',
+            set(TokenSerializer.serialize(token).split('&')),
+            {
+                'access_token=access-token',
+                'refresh_token=refresh-token',
+                'expires_at=1970-01-01+00%3A00%3A00',
+            },
         )
 
 
