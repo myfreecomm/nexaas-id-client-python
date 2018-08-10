@@ -11,9 +11,9 @@ interactions:
     method: POST
     uri: http://localhost:3000/oauth/token
   response:
-    body: {string: '{"access_token":"the-access-token","token_type":"bearer","expires_in":7200,"refresh_token":"the-refresh-token","scope":"profile","created_at":1533912833}'}
+    body: {string: '{"access_token":"the-access-token","token_type":"bearer","expires_in":7200,"refresh_token":"the-refresh-token","scope":"invite","created_at":1533912833}'}
     headers:
-      Content-Length: ['153']
+      Content-Length: ['152']
       Content-type: [application/json]
       Date: ['Tue, 31 Jul 2018 21:28:03 GMT']
       Server: [WSGIServer/0.2 CPython/3.6.5]

@@ -71,6 +71,10 @@ class PW2Client:
         return self.token.refresh_token
 
     @property
+    def scope(self) -> str:
+        return self.token.scope
+
+    @property
     def token(self) -> str:
         return self.__internal_tuple.token
 

@@ -15,7 +15,7 @@ class OAuthToken(metaclass=ABCMeta):
 
     Base = namedtuple(
         'OAuthToken',
-        'access_token refresh_token expires_at',
+        'access_token refresh_token expires_at scope',
     )
 
     def __new__(_cls, *args, **kwargs) -> Base:
@@ -33,8 +33,8 @@ class MainOAuthToken(OAuthToken.Base):
 
     def __new__(cls, access_token: str, refresh_token: str = None,
                 expires_at: datetime = None,
-                created_at: int = -1,
-                expires_in: int = -1, **__) -> OAuthToken.Base:
+                created_at: int = -1, expires_in: int = -1,
+                scope: str = 'profile', **__) -> OAuthToken.Base:
         if not expires_at:
             if expires_in >= 0:
                 if created_at >= 0:
@@ -45,7 +45,9 @@ class MainOAuthToken(OAuthToken.Base):
 
             else:
                 expires_at = None
-        return super().__new__(cls, access_token, refresh_token, expires_at)
+        return super().__new__(
+            cls, access_token, refresh_token, expires_at, scope,
+        )
 
     @property
     def expired(self) -> bool:

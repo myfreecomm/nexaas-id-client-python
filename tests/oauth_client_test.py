@@ -80,3 +80,4 @@ class TestPW2OAuthClient(TestCase):
         token = client.get_token('the-access-grant-code')
         self.assertEqual(token.refresh_token, 'the-refresh-token')
         self.assertEqual(token.expires_at, datetime(2018, 8, 10, 13, 53, 53))
+        self.assertEqual(token.scope, 'invite')
