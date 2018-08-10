@@ -110,7 +110,10 @@ decorated by `authorization_required` will receive an API client ready to use.
 
 The API client attributes:
 
-- `access_token: str` - the access token
+- `access_token: str` – the access token
+- `refresh_token: str` – the refresh token
+- `scope: str` – the allowed scope
+- `token: OAuthToken` – a token wrapper
 - `id: str` – the client id
 - `secret: str` – the client secret
 - `server: urllib.parse.ParseResult` – the PW2 server
@@ -155,3 +158,10 @@ Other attributes you may expect:
 - `Invitation`:
     - `email` (invited user)
     - `requester` (inviter id)
+
+- `OAuthToken`:
+    - `access_token: str`
+    - `refresh_token: str`
+    - `expired_at: datetime.datetime`
+    - `scope: str`
+    - `expired: bool` (maybe not present)
