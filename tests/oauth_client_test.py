@@ -1,4 +1,5 @@
-from unittest import TestCase, skip
+from unittest import TestCase
+from datetime import datetime
 from requests.exceptions import HTTPError
 from urllib.parse import parse_qs, urlparse
 from ._vcr import vcr
@@ -72,6 +73,10 @@ class TestPW2OAuthClient(TestCase):
         token = client.get_token()
         self.assertEqual(token.access_token, 'client-credentials-access-token')
 
-    @skip('TODO: build cassette')
+    @vcr.use_cassette('refresh-token.yaml')
     def test_refresh_token(self):
-        raise NotImplementedError
+        client = PW2OAuthClient('client', 'secret',
+                                redirect_uri='http://localhost/callback')
+        token = client.get_token('the-access-grant-code')
+        self.assertEqual(token.refresh_token, 'the-refresh-token')
+        self.assertEqual(token.expires_at, datetime(2018, 8, 10, 13, 53, 53))
