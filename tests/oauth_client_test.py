@@ -20,9 +20,9 @@ class TestNexaasIDOAuthClient(TestCase):
 
     def test_server_by_name(self):
         client = NexaasIDOAuthClient('client', 'secret',
-                           server='api.passaporteweb.com',
+                           server='id.nexaas.com',
                            redirect_uri='http://localhost/callback')
-        self.assertEqual(client.server.geturl(), 'https://api.passaporteweb.com')
+        self.assertEqual(client.server.geturl(), 'https://id.nexaas.com')
 
     def test_authorize_url(self):
         client = NexaasIDOAuthClient('client', 'secret',

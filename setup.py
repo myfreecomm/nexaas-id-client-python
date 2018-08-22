@@ -10,7 +10,7 @@ setup(
     author_email = 'rodrigo.cacilhas@nexaas.com',
     description = '',
     license = 'Proprietary License',
-    keywords = 'passaporte-web oauth',
+    keywords = 'nexaas-id oauth',
     url = '',
     packages = find_packages(exclude=('tests', 'tests.*')),
     long_description = '',

@@ -1,6 +1,6 @@
 # Nexaas ID Client
 
-This is a client for PassaporteWeb v.2. It brings support for generic OAuth
+This is a client for Nexaas ID v.2. It brings support for generic OAuth
 authentication and for Django and Flask frameworks.
 
 ## OAuth client
@@ -13,7 +13,7 @@ from nexaas_id_client import NexaasIDOAuthClient
 client = NexaasIDOAuthClient(
     application_token,
     application_secret,
-    server='v2.passaporteweb.com.br',
+    server='id.nexaas.com',
     redirect_uri=application_callback,
 )
 ```
@@ -26,7 +26,7 @@ where `code` is the access grant code.
 
 - `NEXAAS_ID_CLIENT_ID`: the application token
 - `NEXAAS_ID_CLIENT_SECRET`: the application secret
-- `NEXAAS_ID_HOST`: the PassaporteWeb host
+- `NEXAAS_ID_HOST`: the Nexaas ID host
 - `NEXAAS_ID_CLIENT_SCOPE`: the scope (can be `None`)
 
 ### Django
