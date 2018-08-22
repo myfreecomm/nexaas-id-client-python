@@ -36,7 +36,7 @@ interactions:
     method: GET
     uri: http://localhost:3000/sign_in
   response:
-    body: {string: "<!DOCTYPE html>\n<html>\n  <head>\n    <title>PassaporteWeb</title>\n\
+    body: {string: "<!DOCTYPE html>\n<html>\n  <head>\n    <title>Nexaas ID</title>\n\
         \    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"\
         >\n    <meta name=\"csrf-param\" content=\"authenticity_token\" />\n<meta\
         \ name=\"csrf-token\" content=\"CB2v77ltMDehkX9BY9MsR6E8YUoiC7m4pFzNQhO+8OSX4xHtf4qBPlJDP0AJQPxf57+wJI+zgUL6XIFGmSDdrw==\"\
@@ -151,8 +151,8 @@ interactions:
         stylesheet\" media=\"screen\" href=\"/assets/xray.self-ceb30b3d566a79424d2bd9fee6c8217308c75134dd3b567ec1ab34d5261cbabc.css?body=1\"\
         \ />\n</div>\n\n    <!--XRAY START 58 /Users/cacilhas/Workspace/NexaaS/passaporte-web-2/app/views/layouts/_flash.html.erb-->\n\
         \n<!--XRAY END 58-->\n    <div class=\"ch-login\">\n      <div class=\"ch-login-container\
-        \ \">\n        <div class=\"ch-login-header\">\n          <img alt=\"PassaporteWeb\"\
-        \ title=\"PassaporteWeb\" class=\"logo\" src=\"/assets/logo-pw-77cd7a06b50d5c0251d20caee9733edb32ed0efce44281038fc2c2dd33812b52.svg\"\
+        \ \">\n        <div class=\"ch-login-header\">\n          <img alt=\"Nexaas ID\"\
+        \ title=\"Nexaas ID\" class=\"logo\" src=\"/assets/logo-pw-77cd7a06b50d5c0251d20caee9733edb32ed0efce44281038fc2c2dd33812b52.svg\"\
         \ />\n          <h1 class=\"ui header\"><span>Fazer login</span><span class=\"\
         ui sub header\">e prosseguir para Minha Conta</span></h1>\n          \n  \
         \      </div>\n\n        <div class=\"ch-login-content\">\n          <!--XRAY\
@@ -175,7 +175,7 @@ interactions:
         1\" checked=\"checked\" name=\"session[remember_me]\" id=\"session_remember_me\"\
         \ /><label class=\"boolean optional\" for=\"session_remember_me\">Confiar\
         \ neste navegador\n            <span data-tooltip=\"Ao desmarcar esta op\xE7\
-        \xE3o, sua sess\xE3o no PassaporteWeb ir\xE1 expirar assim que voc\xEA fechar\
+        \xE3o, sua sess\xE3o no Nexaas ID ir\xE1 expirar assim que voc\xEA fechar\
         \ a janela do seu navegador, para sua seguran\xE7a.\n\" data-inverted=\"\"\
         >\n              <i class=\"icon question circle small grey\"></i>\n     \
         \       </span></label></div>\n      </div>\n    </div>\n    <div class=\"\
