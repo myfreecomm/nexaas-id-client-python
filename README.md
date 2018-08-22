@@ -1,6 +1,6 @@
 # Nexaas ID Client
 
-This is a client for Nexaas ID v.2. It brings support for generic OAuth
+This is a client for Nexaas ID. It brings support for generic OAuth
 authentication and for Django and Flask frameworks.
 
 ## OAuth client
@@ -56,7 +56,7 @@ In order to logout, use the app route `signout`. The query string key
 
 ### Flask
 
-The Flask support supply a blueprint capable of deal with Nexaas ID OAuth.
+The Flask support supplies a blueprint capable of deal with Nexaas ID OAuth.
 
 The use:
 
@@ -90,7 +90,7 @@ In order to logout, use the blueprint route `signout`. The query string key
 
 ## API client
 
-The API client is resposible for dealing with Nexaas ID API.
+The API client is responsible for dealing with Nexaas ID API.
 
 You can get it this way:
 
