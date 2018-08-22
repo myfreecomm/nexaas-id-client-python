@@ -4,16 +4,16 @@ from collections import namedtuple
 from urllib.parse import ParseResult, urlencode, urlparse
 from .oauth_token import OAuthToken
 
-__all__ = ['PW2OAuthClient']
+__all__ = ['NexaasIDOAuthClient']
 
 
 BaseOAuthClient = namedtuple(
-    'PW2OAuthClient',
+    'NexaasIDOAuthClient',
     'id secret scope redirect_uri server',
 )
 
 
-class PW2OAuthClient(BaseOAuthClient):
+class NexaasIDOAuthClient(BaseOAuthClient):
 
     def __new__(cls, client_id: str, secret: str, *,
                 scope: str = None, redirect_uri: str,

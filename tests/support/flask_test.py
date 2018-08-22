@@ -6,7 +6,7 @@ from threading import Thread
 from urllib.parse import parse_qs, urlparse
 from wsgiref.simple_server import make_server, WSGIRequestHandler
 from .._vcr import vcr
-from pw2client.support.flask import authorization_required, oauth
+from nexaas_id_client.support.flask import authorization_required, oauth
 
 
 class FlaskSupportTest(TestCase):
@@ -63,8 +63,8 @@ class QuietHandler(WSGIRequestHandler):
 
 app = Flask(__name__)
 app.config.update(
-    PW2_CLIENT_ID='QJDSMPTJWNFPZJ6WINEKJ2CZ5A',
-    PW2_CLIENT_SECRET='O4EAKLNC6VHDJJZMXJ4TXC4GFA',
+    NEXAAS_ID_CLIENT_ID='QJDSMPTJWNFPZJ6WINEKJ2CZ5A',
+    NEXAAS_ID_CLIENT_SECRET='O4EAKLNC6VHDJJZMXJ4TXC4GFA',
     SECRET_KEY=b'qhfuR/NGtD4hVm9n',
     TESTING=True,
 )
