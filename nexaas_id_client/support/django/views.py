@@ -2,8 +2,8 @@ from django.conf import settings
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.decorators.cache import never_cache
-from pw2client import PW2OAuthClient
-from pw2client.oauth_token import TokenSerializer
+from nexaas_id_client import NexaasIDOAuthClient
+from nexaas_id_client.oauth_token import TokenSerializer
 
 __all__ = ['signin', 'callback']
 
@@ -39,10 +39,10 @@ def callback(request):
 
 
 def get_client(request):
-    return PW2OAuthClient(
-        settings.PW2_CLIENT_ID,
-        settings.PW2_CLIENT_SECRET,
-        server=settings.PW2_HOST,
+    return NexaasIDOAuthClient(
+        settings.NEXAAS_ID_CLIENT_ID,
+        settings.NEXAAS_ID_CLIENT_SECRET,
+        server=settings.NEXAAS_ID_HOST,
         redirect_uri=request.build_absolute_uri(reverse(callback)),
-        scope=settings.PW2_CLIENT_SCOPE,
+        scope=settings.NEXAAS_ID_CLIENT_SCOPE,
     )

@@ -2,7 +2,7 @@ from unittest import TestCase
 from unittest.mock import patch
 from collections import namedtuple
 from datetime import datetime
-from pw2client.oauth_token import MainOAuthToken, OAuthToken, TokenSerializer
+from nexaas_id_client.oauth_token import MainOAuthToken, OAuthToken, TokenSerializer
 
 
 class TestOAuthToken(TestCase):
@@ -89,8 +89,8 @@ class TestMainOAuthToken(TestCase):
         self.assertEqual(token.scope, 'profile')
 
     def test_created_at_not_supplied(self):
-        with patch('pw2client.oauth_token.datetime') as dt, \
-             patch('pw2client.oauth_token._isinstance', return_value=False):
+        with patch('nexaas_id_client.oauth_token.datetime') as dt, \
+             patch('nexaas_id_client.oauth_token._isinstance', return_value=False):
             dt.now.return_value = datetime(2018, 1, 1, 12, 0)
             token = OAuthToken(access_token='atoken', expires_in=300)
         self.assertIsInstance(token, MainOAuthToken)

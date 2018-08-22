@@ -4,13 +4,13 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name = 'pw2client',
+    name = 'nexaas_id_client',
     version = '1.0',
     author = 'Rodrigo Cacilhas',
     author_email = 'rodrigo.cacilhas@nexaas.com',
     description = '',
     license = 'Proprietary License',
-    keywords = 'passaporte-web oauth',
+    keywords = 'nexaas-id oauth',
     url = '',
     packages = find_packages(exclude=('tests', 'tests.*')),
     long_description = '',

@@ -15,7 +15,7 @@ interactions:
       Content-Type: [text/html; charset=utf-8]
       Location: ['http://localhost:3000/sign_in']
       Referrer-Policy: [strict-origin-when-cross-origin]
-      Set-Cookie: [_pw2_return_to=%5B%22%2Foauth%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3DQJDSMPTJWNFPZJ6WINEKJ2CZ5A%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%253A3030%252Foauth%252Fcallback%26scope%3Dprofile%22%5D;
+      Set-Cookie: [_nexaas_id_return_to=%5B%22%2Foauth%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3DQJDSMPTJWNFPZJ6WINEKJ2CZ5A%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%253A3030%252Foauth%252Fcallback%26scope%3Dprofile%22%5D;
           path=/]
       X-Content-Type-Options: [nosniff]
       X-Download-Options: [noopen]
@@ -31,12 +31,12 @@ interactions:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      Cookie: [_pw2_return_to=%5B%22%2Foauth%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3DQJDSMPTJWNFPZJ6WINEKJ2CZ5A%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%253A3030%252Foauth%252Fcallback%26scope%3Dprofile%22%5D]
+      Cookie: [_nexaas_id_return_to=%5B%22%2Foauth%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3DQJDSMPTJWNFPZJ6WINEKJ2CZ5A%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%253A3030%252Foauth%252Fcallback%26scope%3Dprofile%22%5D]
       User-Agent: [python-requests/2.19.1]
     method: GET
     uri: http://localhost:3000/sign_in
   response:
-    body: {string: "<!DOCTYPE html>\n<html>\n  <head>\n    <title>PassaporteWeb</title>\n\
+    body: {string: "<!DOCTYPE html>\n<html>\n  <head>\n    <title>Nexaas ID</title>\n\
         \    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"\
         >\n    <meta name=\"csrf-param\" content=\"authenticity_token\" />\n<meta\
         \ name=\"csrf-token\" content=\"CB2v77ltMDehkX9BY9MsR6E8YUoiC7m4pFzNQhO+8OSX4xHtf4qBPlJDP0AJQPxf57+wJI+zgUL6XIFGmSDdrw==\"\
@@ -129,15 +129,15 @@ interactions:
         \ data-turbolinks-track=\"reload\"></script>\n    <script src=\"/packs/application-5be13e4688c7c60d23c7.js\"\
         \ data-turbolinks-track=\"reload\"></script>\n    <script src=\"/assets/i18n.self-6fdd343c793c24b71edfd39b10f8401007139dc183b5a346a4c9a489fee6dcc5.js?body=1\"\
         ></script>\n\n    <script>\n      window.locale = \"pt\"\n      window.default_locale\
-        \ = \"pt\"\n    </script>\n  </head>\n\n  <body data-theme=\"passaporteWeb\"\
+        \ = \"pt\"\n    </script>\n  </head>\n\n  <body data-theme=\"nexaasID\"\
         >\n<div id=\"xray-bar\" style=\"display:none\">\n    <div id=\"xray-bar-controller-path\"\
         >\n        <span class=\"xray-bar-btn xray-bar-controller xray-icon-flash\"\
-        \ data-path=\"/Users/cacilhas/Workspace/NexaaS/passaporte-web-2/app/controllers/web/sessions_controller.rb\"\
+        \ data-path=\"/Users/cacilhas/Workspace/NexaaS/nexaas-id/app/controllers/web/sessions_controller.rb\"\
         >\n          <b></b>\n          Web::SessionsController<span class=\"xray-bar-controller-action\"\
         >#new</span>\n        </span>\n        <span class=\"xray-bar-btn xray-bar-layout\
-        \ xray-icon-columns\" data-path=\"/Users/cacilhas/Workspace/NexaaS/passaporte-web-2/app/views/layouts/default.html.erb\"\
+        \ xray-icon-columns\" data-path=\"/Users/cacilhas/Workspace/NexaaS/nexaas-id/app/views/layouts/default.html.erb\"\
         >\n          <b></b>\n          default.html.erb\n        </span>\n      \
-        \  <span class=\"xray-bar-btn xray-bar-view xray-icon-doc\" data-path=\"/Users/cacilhas/Workspace/NexaaS/passaporte-web-2/app/views/web/sessions/new.html.erb\"\
+        \  <span class=\"xray-bar-btn xray-bar-view xray-icon-doc\" data-path=\"/Users/cacilhas/Workspace/NexaaS/nexaas-id/app/views/web/sessions/new.html.erb\"\
         >\n          new.html.erb\n        </span>\n    </div>\n  <div id=\"xray-bar-togglers\"\
         >\n    <span class=\"xray-bar-btn xray-bar-all-toggler xray-icon-search\"\
         ></span>\n    <span class=\"xray-bar-btn xray-bar-templates-toggler\">\n \
@@ -149,14 +149,14 @@ interactions:
         -f\">\n      <button type=\"submit\">Save</button>\n      <p>Settings are\
         \ saved to /Users/cacilhas/.xrayconfig</p>\n  </form>\n  </div>\n  <link rel=\"\
         stylesheet\" media=\"screen\" href=\"/assets/xray.self-ceb30b3d566a79424d2bd9fee6c8217308c75134dd3b567ec1ab34d5261cbabc.css?body=1\"\
-        \ />\n</div>\n\n    <!--XRAY START 58 /Users/cacilhas/Workspace/NexaaS/passaporte-web-2/app/views/layouts/_flash.html.erb-->\n\
+        \ />\n</div>\n\n    <!--XRAY START 58 /Users/cacilhas/Workspace/NexaaS/nexaas-id/app/views/layouts/_flash.html.erb-->\n\
         \n<!--XRAY END 58-->\n    <div class=\"ch-login\">\n      <div class=\"ch-login-container\
-        \ \">\n        <div class=\"ch-login-header\">\n          <img alt=\"PassaporteWeb\"\
-        \ title=\"PassaporteWeb\" class=\"logo\" src=\"/assets/logo-pw-77cd7a06b50d5c0251d20caee9733edb32ed0efce44281038fc2c2dd33812b52.svg\"\
+        \ \">\n        <div class=\"ch-login-header\">\n          <img alt=\"Nexaas ID\"\
+        \ title=\"Nexaas ID\" class=\"logo\" src=\"/assets/logo-pw-77cd7a06b50d5c0251d20caee9733edb32ed0efce44281038fc2c2dd33812b52.svg\"\
         \ />\n          <h1 class=\"ui header\"><span>Fazer login</span><span class=\"\
         ui sub header\">e prosseguir para Minha Conta</span></h1>\n          \n  \
         \      </div>\n\n        <div class=\"ch-login-content\">\n          <!--XRAY\
-        \ START 57 /Users/cacilhas/Workspace/NexaaS/passaporte-web-2/app/views/web/sessions/new.html.erb-->\n\
+        \ START 57 /Users/cacilhas/Workspace/NexaaS/nexaas-id/app/views/web/sessions/new.html.erb-->\n\
         \n<div class=\"ch-login-form\">\n  <form class=\"simple_form ui form\" id=\"\
         new_session\" action=\"/sign_in\" accept-charset=\"UTF-8\" method=\"post\"\
         ><input name=\"utf8\" type=\"hidden\" value=\"&#x2713;\" /><input type=\"\
@@ -175,7 +175,7 @@ interactions:
         1\" checked=\"checked\" name=\"session[remember_me]\" id=\"session_remember_me\"\
         \ /><label class=\"boolean optional\" for=\"session_remember_me\">Confiar\
         \ neste navegador\n            <span data-tooltip=\"Ao desmarcar esta op\xE7\
-        \xE3o, sua sess\xE3o no PassaporteWeb ir\xE1 expirar assim que voc\xEA fechar\
+        \xE3o, sua sess\xE3o no Nexaas ID ir\xE1 expirar assim que voc\xEA fechar\
         \ a janela do seu navegador, para sua seguran\xE7a.\n\" data-inverted=\"\"\
         >\n              <i class=\"icon question circle small grey\"></i>\n     \
         \       </span></label></div>\n      </div>\n    </div>\n    <div class=\"\
@@ -185,8 +185,8 @@ interactions:
         /recover_password\">Esqueceu sua senha?</a></span>\n    <span>Ainda n\xE3\
         o possui conta? <a href=\"/start_sign_up\">Crie agora</a></span>\n  </div>\n\
         </div>\n\n<!--XRAY END 57-->\n        </div>\n\n        <div class=\"ch-login-footer\"\
-        >\n          <ul>\n            <li><a href=\"https://www.passaporteweb.com.br/termos_de_servico\"\
-        >Termos de servi\xE7o</a></li>\n            <li><a href=\"https://myfreecomm.github.io/passaporte-web\"\
+        >\n          <ul>\n            <li><a href=\"https://id.nexaas.com/termos_de_servico\"\
+        >Termos de servi\xE7o</a></li>\n            <li><a href=\"https://myfreecomm.github.io/nexaas-id\"\
         >Documenta\xE7\xE3o da API</a></li>\n          </ul>\n        </div>\n   \
         \   </div>\n    </div>\n  </body>\n</html>\n"}
     headers:
@@ -195,7 +195,7 @@ interactions:
       Content-Type: [text/html; charset=utf-8]
       ETag: [W/"12e58333435e065bcdd81480e9f85ebe"]
       Referrer-Policy: [strict-origin-when-cross-origin]
-      Set-Cookie: [_pw2_session=7ae3b152971c48bb60f8438a5473cd4d; path=/; HttpOnly;
+      Set-Cookie: [_nexaas_id_session=7ae3b152971c48bb60f8438a5473cd4d; path=/; HttpOnly;
           SameSite=Strict]
       X-Content-Type-Options: [nosniff]
       X-Download-Options: [noopen]

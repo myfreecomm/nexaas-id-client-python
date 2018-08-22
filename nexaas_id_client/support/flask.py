@@ -1,22 +1,21 @@
 from functools import wraps
 import inspect
 from flask import Blueprint, current_app, redirect, request, session, url_for
-from pw2client import PW2Client
-from ..oauth_client import PW2OAuthClient
-from ..oauth_token import OAuthToken, TokenSerializer
+from nexaas_id_client import NexaasIDClient, NexaasIDOAuthClient
+from nexaas_id_client.oauth_token import OAuthToken, TokenSerializer
 
 __all__ = ['authorization_required', 'oauth']
 
 
-oauth = Blueprint('pw2_oauth', __name__)
+oauth = Blueprint('nexaas_id_oauth', __name__)
 
 
 def authorization_required(wrapped):
     @wraps(wrapped)
     def wrapper(*args, **kwargs):
         if 'oauth_token' not in session:
-            return redirect(url_for('pw2_oauth.signin'))
-        kwargs['api_client'] = PW2Client.from_oauth(
+            return redirect(url_for('nexaas_id_oauth.signin'))
+        kwargs['api_client'] = NexaasIDClient.from_oauth(
             TokenSerializer.deserialize(session['oauth_token']),
             client=get_client(),
         )
@@ -56,10 +55,10 @@ def callback():
 
 
 def get_client():
-    return PW2OAuthClient(
-        current_app.config['PW2_CLIENT_ID'],
-        current_app.config['PW2_CLIENT_SECRET'],
-        server=current_app.config.get('PW2_HOST'),
-        redirect_uri=url_for('pw2_oauth.callback', _external=True),
-        scope=current_app.config.get('PW2_CLIENT_SCOPE'),
+    return NexaasIDOAuthClient(
+        current_app.config['NEXAAS_ID_CLIENT_ID'],
+        current_app.config['NEXAAS_ID_CLIENT_SECRET'],
+        server=current_app.config.get('NEXAAS_ID_HOST'),
+        redirect_uri=url_for('nexaas_id_oauth.callback', _external=True),
+        scope=current_app.config.get('NEXAAS_ID_CLIENT_SCOPE'),
     )

@@ -1,5 +1,5 @@
 from unittest import TestCase, skip
-from pw2client.support import django
+from nexaas_id_client.support import django
 
 
 class DjangoSupportTest(TestCase):

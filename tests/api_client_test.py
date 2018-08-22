@@ -4,13 +4,13 @@ from requests.exceptions import HTTPError
 from urllib.parse import parse_qs, urlparse
 from uuid import UUID
 from ._vcr import vcr
-from pw2client import PW2Client, PW2OAuthClient
+from nexaas_id_client import NexaasIDClient, NexaasIDOAuthClient
 
 
-class TestPW2Client(TestCase):
+class TestNexaasIDClient(TestCase):
     @staticmethod
     def build_oauth_client():
-        return PW2OAuthClient(
+        return NexaasIDOAuthClient(
             'E4KAAPDCBBBZVHZBTXZX6EEBDU',
             'F6K34MJSAZBC7FNG7XBBS6HMRY',
             redirect_uri='http://localhost:9000/callback',
@@ -18,7 +18,7 @@ class TestPW2Client(TestCase):
 
     @classmethod
     def build_api_client(cls):
-        return PW2Client.from_oauth(
+        return NexaasIDClient.from_oauth(
             '35822300c02a679292f2dda5069aa4a997419dc114637dc8aae62f55394a52b0',
             client=cls.build_oauth_client(),
         )

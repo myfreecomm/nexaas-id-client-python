@@ -1,6 +1,6 @@
-# PW2 Client
+# Nexaas ID Client
 
-This is a client for PassaporteWeb v.2. It brings support for generic OAuth
+This is a client for Nexaas ID. It brings support for generic OAuth
 authentication and for Django and Flask frameworks.
 
 ## OAuth client
@@ -8,12 +8,12 @@ authentication and for Django and Flask frameworks.
 The general use is:
 
 ```python
-from pw2client import PW2OAuthClient
+from nexaas_id_client import NexaasIDOAuthClient
 
-client = PW2OAuthClient(
+client = NexaasIDOAuthClient(
     application_token,
     application_secret,
-    server='v2.passaporteweb.com.br',
+    server='id.nexaas.com',
     redirect_uri=application_callback,
 )
 ```
@@ -24,27 +24,27 @@ where `code` is the access grant code.
 
 ### Settings for Django and Flask
 
-- `PW2_CLIENT_ID`: the application token
-- `PW2_CLIENT_SECRET`: the application secret
-- `PW2_HOST`: the PassaporteWeb host
-- `PW2_CLIENT_SCOPE`: the scope (can be `None`)
+- `NEXAAS_ID_CLIENT_ID`: the application token
+- `NEXAAS_ID_CLIENT_SECRET`: the application secret
+- `NEXAAS_ID_HOST`: the Nexaas ID host
+- `NEXAAS_ID_CLIENT_SCOPE`: the scope (can be `None`)
 
 ### Django
 
 In Django you must include the following path to the main `urlpatterns`:
 
 ```python
-    path('oauth/', include('pw2client.support.django.urls'))
+    path('oauth/', include('nexaas_id_client.support.django.urls'))
 ```
 
 The views that requires authorized access must be decorated:
 
 ```python
-from pw2client import PW2Client
-from pw2client.support.django.decorators import authorization_required
+from nexaas_id_client import NexaasIDClient
+from nexaas_id_client.support.django.decorators import authorization_required
 
 @authorization_required
-def index(request, api_client: PW2Client):
+def index(request, api_client: NexaasIDClient):
     ...
 ```
 
@@ -56,13 +56,13 @@ In order to logout, use the app route `signout`. The query string key
 
 ### Flask
 
-The Flask support supply a blueprint capable of deal with PW2 OAuth.
+The Flask support supplies a blueprint capable of deal with Nexaas ID OAuth.
 
 The use:
 
 ```python
 from flask import Flask
-from pw2client.support.flask import oauth
+from nexaas_id_client.support.flask import oauth
 
 
 app = Flask(__name__)
@@ -72,13 +72,13 @@ app.register_blueprint(oauth, url_prefix='/oauth')
 The decorator is similar to Django support:
 
 ```python
-from pw2client import PW2Client
-from pw2client.support.flask import authorization_required, oauth
+from nexaas_id_client import NexaasIDClient
+from nexaas_id_client.support.flask import authorization_required, oauth
 ...
 
 @app.route('/')
 @authorization_required
-def index(api_client: PW2Client):
+def index(api_client: NexaasIDClient):
     ...
 ```
 
@@ -90,12 +90,12 @@ In order to logout, use the blueprint route `signout`. The query string key
 
 ## API client
 
-The API client is resposible for dealing with PW2 API.
+The API client is responsible for dealing with Nexaas ID API.
 
 You can get it this way:
 
 ```python
-api_client = PW2Client.from_oauth(
+api_client = NexaasIDClient.from_oauth(
     client.get_access_token(code),
     client=client,
 )
@@ -116,7 +116,7 @@ The API client attributes:
 - `token: OAuthToken` – a token wrapper
 - `id: str` – the client id
 - `secret: str` – the client secret
-- `server: urllib.parse.ParseResult` – the PW2 server
+- `server: urllib.parse.ParseResult` – the Nexaas ID server
 - `personal_info: PersonalInfo` – the user’s personal data
 - `professional_info: ProfessionalInfo` – the user’s professional data
 - `emails: Emails` – a dictionary containing user id and the its e-mails list

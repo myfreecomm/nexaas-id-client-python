@@ -7,16 +7,16 @@ import dateutil.parser
 import requests
 from requests.auth import AuthBase
 from requests.models import Request
-from .oauth_client import PW2OAuthClient
+from .oauth_client import NexaasIDOAuthClient
 from .oauth_token import OAuthToken
 
-__all__ = ['PW2Client']
+__all__ = ['NexaasIDClient']
 
 
 ClientProps = namedtuple('ClientProps', 'token id secret server')
 
 
-class PW2Client:
+class NexaasIDClient:
     __slots__ = (
         '__internal_tuple',
         '_personal_info',
@@ -27,7 +27,7 @@ class PW2Client:
 
     @classmethod
     def from_oauth(cls, token: OAuthToken, *,
-                   client: PW2OAuthClient) -> 'PW2Client':
+                   client: NexaasIDOAuthClient) -> 'NexaasIDClient':
         return cls(
             token=token,
             id=client.id,
