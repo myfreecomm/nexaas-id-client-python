@@ -1,4 +1,4 @@
 from .oauth_client import NexaasIDOAuthClient
-from .client import NexaasIDClient
+from .api_client import NexaasIDClient
 
 __all__ = ['NexaasIDOAuthClient', 'NexaasIDClient']
