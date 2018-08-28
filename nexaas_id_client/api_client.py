@@ -7,10 +7,16 @@ import dateutil.parser
 import requests
 from requests.auth import AuthBase
 from requests.models import Request
+import warnings
 from .oauth_client import NexaasIDOAuthClient
 from .oauth_token import OAuthToken
 
 __all__ = ['NexaasIDClient']
+
+try:
+    DeprecationWarning = warnings.DeprecationWarning
+except AttributeError:
+    DeprecationWarning = warnings._getcategory('DeprecationWarning')
 
 
 ClientProps = namedtuple('ClientProps', 'token id secret server')
@@ -122,8 +128,20 @@ class NexaasIDClient:
 
     @property
     def navbar_url(self) -> str:
+        warnings.warn(
+            'deprecated navbar, use user_widget_url',
+            category=DeprecationWarning,
+            stacklevel=2,
+        )
         return self.server._replace(
             path='/api/v1/widgets/navbar.js',
+            query=urlencode({'access_token': self.access_token}),
+        ).geturl()
+
+    @property
+    def user_widget_url(self) -> str:
+        return self.server._replace(
+            path='/api/v1/widgets/user.js',
             query=urlencode({'access_token': self.access_token}),
         ).geturl()
 

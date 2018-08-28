@@ -132,36 +132,38 @@ attribute (`uuid.UUID`) at least.
 Other attributes you may expect:
 
 - `PersonalInfo`
-    - `name: str`
-    - `nickname: str`
-    - `email: str`
-    - `birth: datetime.date`
-    - `gender: str`
-    - `language: str`
-    - `picture: str`
-    - `timezone: str`
-    - `country: str`
-    - `city: str`
-    - `bio: str`
+  - `full_name: str`
+  - `first_name: str`
+  - `last_name: str`
+  - `nickname: str`
+  - `email: str`
+  - `birth: datetime.date`
+  - `gender: str`
+  - `language: str`
+  - `picture: str`
+  - `timezone: str`
+  - `country: str`
+  - `city: str`
+  - `bio: str`
 
 - `ProfessionalInfo`
-    - `profession: str`
-    - `company: str`
-    - `position: str`
+  - `profession: str`
+  - `company: str`
+  - `position: str`
 
 - `Emails`
-    - `emails: List[str]`
+  - `emails: List[str]`
 
 - `Contacts`:
-    - `phone_numbers: List[str]`
+  - `phone_numbers: List[str]`
 
 - `Invitation`:
-    - `email` (invited user)
-    - `requester` (inviter id)
+  - `email` (invited user)
+  - `requester` (inviter id)
 
 - `OAuthToken`:
-    - `access_token: str`
-    - `refresh_token: str`
-    - `expired_at: datetime.datetime`
-    - `scope: str`
-    - `expired: bool` (maybe not present)
+  - `access_token: str`
+  - `refresh_token: str`
+  - `expired_at: datetime.datetime`
+  - `scope: str`
+  - `expired: bool` (maybe not present)

@@ -38,13 +38,20 @@ class TestNexaasIDClient(TestCase):
             'http://localhost:3000/api/v1/widgets/navbar.js?'
             'access_token={}'.format(client.access_token),
         )
+        self.assertEqual(
+            client.user_widget_url,
+            'http://localhost:3000/api/v1/widgets/user.js?'
+            'access_token={}'.format(client.access_token),
+        )
 
     @vcr.use_cassette('personal_info.yaml')
     def test_personal_info(self):
         client = self.build_api_client()
         info = client.personal_info
         self.assertEqual(info.id, UUID('9680f8e1-ff10-46b5-bedb-f4545adabfca'))
-        self.assertEqual(info.name, 'Rodrigo Cacilhas')
+        self.assertEqual(info.full_name, 'Rodrigo Cacilhas')
+        self.assertEqual(info.first_name, 'Rodrigo')
+        self.assertEqual(info.last_name, 'Cacilhas')
         self.assertEqual(info.nickname, 'cacilhas')
         self.assertEqual(info.email, 'rodrigo.cacilhas@nexaas.com')
         self.assertEqual(info.birth, date(1975, 11, 20))
