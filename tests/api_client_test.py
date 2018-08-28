@@ -38,6 +38,11 @@ class TestNexaasIDClient(TestCase):
             'http://localhost:3000/api/v1/widgets/navbar.js?'
             'access_token={}'.format(client.access_token),
         )
+        self.assertEqual(
+            client.user_widget_url,
+            'http://localhost:3000/api/v1/widgets/user.js?'
+            'access_token={}'.format(client.access_token),
+        )
 
     @vcr.use_cassette('personal_info.yaml')
     def test_personal_info(self):
