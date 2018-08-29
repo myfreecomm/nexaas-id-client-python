@@ -9,7 +9,6 @@ class SignedOutException(HTTPError):
     @classmethod
     def from_http_error(cls, exc: HTTPError) -> HTTPError:
         error = cls(
-            message=exc.message,
             request=exc.request,
             response=exc.response,
         )
