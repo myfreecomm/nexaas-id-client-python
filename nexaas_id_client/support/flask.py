@@ -3,6 +3,7 @@ import inspect
 from flask import Blueprint, current_app, redirect, request, session, url_for
 from nexaas_id_client import NexaasIDClient, NexaasIDOAuthClient
 from nexaas_id_client.oauth_token import OAuthToken, TokenSerializer
+from nexaas_id_client.exceptions import SignedOutException
 
 __all__ = ['authorization_required', 'oauth']
 
@@ -15,11 +16,28 @@ def authorization_required(wrapped):
     def wrapper(*args, **kwargs):
         if 'oauth_token' not in session:
             return redirect(url_for('nexaas_id_oauth.signin'))
-        kwargs['api_client'] = NexaasIDClient.from_oauth(
+
+        client = get_client()
+        token = kwargs['api_client'] = NexaasIDClient.from_oauth(
             TokenSerializer.deserialize(session['oauth_token']),
-            client=get_client(),
+            client=client,
         )
-        return wrapped(*args, **kwargs)
+
+        try:
+            return wrapped(*args, **kwargs)
+
+        except SignedOutException:
+            try:
+                token = client.refresh_token(token)
+                session['oauth_token'] = TokenSerializer.serialize(token)
+                kwargs['api_client'] = NexaasIDClient.from_oauth(
+                    token,
+                    client=client,
+                )
+                return wrapped(*args, **kwargs)
+
+            except SignedOutException:
+                return redirect(url_for('nexaas_id_oauth.signout'))
     return wrapper
 
 

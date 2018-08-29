@@ -10,6 +10,7 @@ from requests.models import Request
 import warnings
 from .oauth_client import NexaasIDOAuthClient
 from .oauth_token import OAuthToken
+from .exceptions import SignedOutException
 
 __all__ = ['NexaasIDClient']
 
@@ -56,7 +57,7 @@ class NexaasIDClient:
             self.server._replace(path=path).geturl(),
             auth=HTTPBearerAuth(self.access_token),
         )
-        res.raise_for_status()
+        SignedOutException.check_status(res)
         return res.json(object_hook=_json_decode)
 
     def __post_response(self, path: str, data: dict) -> dict:
@@ -65,7 +66,7 @@ class NexaasIDClient:
             json=data,
             auth=HTTPBearerAuth(self.access_token),
         )
-        res.raise_for_status()
+        SignedOutException.check_status(res)
         return res.json(object_hook=_json_decode)
 
     @property
