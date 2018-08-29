@@ -21,6 +21,6 @@ class SignedOutException(HTTPError):
         try:
             res.raise_for_status()
         except HTTPError as exc:
-            if res.status_code == 400:
+            if res.status_code == 401:
                 raise cls.from_http_error(exc)
             raise
