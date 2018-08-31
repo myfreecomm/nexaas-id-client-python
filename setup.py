@@ -8,7 +8,7 @@ with (Path(__file__).parent / 'README.md').open() as fp:
 
 
 setup(
-    name = 'nexaas_id_client',
+    name = 'nexaas-id-client',
     version = '1.0.1',
     author = 'Rodrigo Cacilhas',
     author_email = 'rodrigo.cacilhas@nexaas.com',
