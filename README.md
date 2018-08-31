@@ -40,12 +40,16 @@ In Django you must include the following path to the main `urlpatterns`:
 The views that requires authorized access must be decorated:
 
 ```python
-from nexaas_id_client import NexaasIDClient
 from nexaas_id_client.support.django.decorators import authorization_required
+from nexaas_id_client.support.django.helpers import signed_in
 
 @authorization_required
-def index(request, api_client: NexaasIDClient):
-    ...
+def index(request, api_client: 'nexaas_id_client.NexaasIDClient') -> 'django.http.request.HttpResponse':
+	res = None
+	with signed_in() as unsigned:
+		# Set res to the response
+		...
+	return res or unsigned.redirect
 ```
 
 Your view must expect an `api_client` as argument – see bellow. Anyway you can
@@ -72,13 +76,12 @@ app.register_blueprint(oauth, url_prefix='/oauth')
 The decorator is similar to Django support:
 
 ```python
-from nexaas_id_client import NexaasIDClient
 from nexaas_id_client.support.flask import authorization_required, oauth
 ...
 
 @app.route('/')
 @authorization_required
-def index(api_client: NexaasIDClient):
+def index(api_client: 'nexaas_id_client.NexaasIDClient') -> 'flask.Response':
     ...
 ```
 
