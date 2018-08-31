@@ -41,15 +41,10 @@ The views that requires authorized access must be decorated:
 
 ```python
 from nexaas_id_client.support.django.decorators import authorization_required
-from nexaas_id_client.support.django.helpers import signed_in
 
 @authorization_required
 def index(request, api_client: 'nexaas_id_client.NexaasIDClient') -> 'django.http.request.HttpResponse':
-	res = None
-	with signed_in() as unsigned:
-		# Set res to the response
-		...
-	return res or unsigned.redirect
+	...
 ```
 
 Your view must expect an `api_client` as argument – see bellow. Anyway you can
@@ -57,6 +52,9 @@ retrieve de access token from the session, under the key `oauth_access_token`.
 
 In order to logout, use the app route `signout`. The query string key
 `next_url` inform where to redirect after sign out.
+
+**Caution:** If the view returns falsy (`None`, `False`, `0`, `""`, et cetera),
+the `authorization_required` decorator redirects to sign out URL.
 
 ### Flask
 
