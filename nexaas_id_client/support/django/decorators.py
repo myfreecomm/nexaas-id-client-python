@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from nexaas_id_client import NexaasIDClient
 from nexaas_id_client.oauth_token import TokenSerializer
-from nexaas_id_client.helpers import signed_in
+from nexaas_id_client.support.django.helpers import signed_in
 from . import views
 
 __all__ = ['authorization_required']
