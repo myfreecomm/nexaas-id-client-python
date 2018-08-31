@@ -8,19 +8,19 @@ with (Path(__file__).parent / 'README.md').open() as fp:
 
 
 setup(
-    name = 'nexaas-id-client',
-    version = '1.0.1',
-    author = 'Rodrigo Cacilhas',
-    author_email = 'rodrigo.cacilhas@nexaas.com',
-    description = 'Nexaas ID Python client',
+    name='nexaas-id-client',
+    version='1.0.1',
+    author='Rodrigo Cacilhas',
+    author_email='rodrigo.cacilhas@nexaas.com',
+    description='Nexaas ID Python client',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    license = 'Proprietary License',
-    keywords = 'nexaas-id oauth',
-    url = 'https://github.com/myfreecomm/nexaas-id-client-python',
-    packages = find_packages(exclude=('tests', 'tests.*')),
-    test_suite = 'tests',
-    install_requires = [
+    license='Proprietary License',
+    keywords='nexaas-id oauth',
+    url='https://github.com/myfreecomm/nexaas-id-client-python',
+    packages=find_packages(exclude=('tests', 'tests.*')),
+    test_suite='tests',
+    install_requires=[
         'python-dateutil>=2.7.0',
         'requests>=2.19.0',
     ],
