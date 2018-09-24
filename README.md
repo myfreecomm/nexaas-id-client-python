@@ -19,7 +19,7 @@ client = NexaasIDOAuthClient(
 ```
 
 The authorization URL can get from `client.authorize_url` and the access token
-can be retrieve in the callback procedure from `client.get_access_token(code)`,
+can be retrieve in the callback procedure from `client.get_token(code)`,
 where `code` is the access grant code.
 
 ### Settings for Django and Flask
@@ -97,7 +97,7 @@ You can get it this way:
 
 ```python
 api_client = NexaasIDClient.from_oauth(
-    client.get_access_token(code),
+    client.get_token(code),
     client=client,
 )
 ```
