@@ -130,9 +130,10 @@ The classes `PersonalInfo`, `ProfessionalInfo`, `Emails`, `Contacts` and
 `Invitation` are built on demand metaprogrammatically, and have an `id`
 attribute (`uuid.UUID`) at least.
 
-Other attributes you may expect:
+Attributes you may expect:
 
 - `PersonalInfo`
+  - `id: uuid.UUID` 
   - `full_name: str`
   - `first_name: str`
   - `last_name: str`
@@ -148,19 +149,23 @@ Other attributes you may expect:
   - `bio: str`
 
 - `ProfessionalInfo`
+  - `id: uuid.UUID` 
   - `profession: str`
   - `company: str`
   - `position: str`
 
 - `Emails`
+  - `id: uuid.UUID` 
   - `emails: List[str]`
 
 - `Contacts`:
+  - `id: uuid.UUID` 
   - `phone_numbers: List[str]`
 
 - `Invitation`:
-  - `email` (invited user)
-  - `requester` (inviter id)
+  - `id: uuid.UUID` 
+  - `email: str` (invited user)
+  - `requester: uuid.UUID` (inviter id)
 
 - `OAuthToken`:
   - `access_token: str`
