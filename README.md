@@ -58,7 +58,7 @@ the `authorization_required` decorator redirects to sign out URL.
 
 ### Flask
 
-The Flask support supplies a blueprint capable of deal with Nexaas ID OAuth.
+The Flask support supplies a blueprint capable of dealing with Nexaas ID OAuth.
 
 The use:
 
