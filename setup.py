@@ -25,7 +25,7 @@ setup(
         'requests>=2.19.0',
     ],
     tests_require=[
-        'django==2.0.0',
+        'django==2.2.13',
         'Flask==1.0.2',
         'pycodestyle==2.4.0',
         'pylint==2.0.1',
